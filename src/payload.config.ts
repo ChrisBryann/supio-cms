@@ -10,6 +10,8 @@ import { Users } from './collections/users/config'
 import { Media } from './collections/media/config'
 import { Products } from './collections/products/config'
 import { Blogs } from './collections/blogs/config'
+import { en } from '@payloadcms/translations/languages/en'
+import { ko } from '@payloadcms/translations/languages/ko'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -19,6 +21,10 @@ export default buildConfig({
   csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
   cors: {
     origins: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
+  },
+  i18n: {
+    fallbackLanguage: 'en',
+    supportedLanguages: { en, ko },
   },
   admin: {
     user: Users.slug,
