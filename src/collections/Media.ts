@@ -14,13 +14,15 @@ export const Media: CollectionConfig = {
     {
       name: 'collection',
       type: 'relationship',
-      relationTo: ['products', 'users'],
-      required: true,
-      hasMany: true,
+      relationTo: ['products'],
+      admin: {
+        readOnly: true,
+      },
     },
   ],
   upload: {
     staticDir: 'media',
     mimeTypes: ['image/*'],
   },
+  folders: true,
 }

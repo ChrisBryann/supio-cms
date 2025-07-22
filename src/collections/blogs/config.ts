@@ -1,49 +1,57 @@
 import { CollectionConfig } from 'payload'
 
-export const Products: CollectionConfig = {
-  slug: 'products',
+export const Blogs: CollectionConfig = {
+  slug: 'blogs',
   fields: [
     {
-      name: 'name',
-      label: 'Name',
+      name: 'author',
+      type: 'relationship',
+      relationTo: 'users',
+      required: true,
+      defaultValue: ({ req }) => {
+        if (req.user) return req.user.id
+      },
+      admin: {
+        readOnly: true,
+      },
+    },
+    {
+      name: 'title',
       type: 'text',
       required: true,
     },
     {
-      name: 'main_description',
-      label: 'Main Description',
-      type: 'textarea',
+      name: 'content',
+      type: 'richText',
       required: true,
     },
     {
-      name: 'additional_description',
-      label: 'Additional Description',
-      type: 'textarea',
+      name: 'category',
+      type: 'text',
+      required: true,
     },
     {
-      name: 'product_image',
-      label: 'Product Image',
+      name: 'blog_image',
+      label: 'Cover Image',
       type: 'upload',
       relationTo: 'media',
       required: true,
     },
   ],
+  versions: {
+    drafts: true,
+  },
   hooks: {
     beforeOperation: [
       async ({ req, operation, collection }) => {
-        if (
-          (operation === 'create' || operation === 'update') &&
-          req.data &&
-          req.data.product_image
-        ) {
+        if ((operation === 'create' || operation === 'update') && req.data && req.data.blog_image) {
           // find the image object in the media collection
-          const product_image_id = await req.payload.findByID({
+          const blog_image_id = await req.payload.findByID({
             collection: 'media',
-            id: req.data.product_image as string,
+            id: req.data.blog_image as string,
           })
-          if (product_image_id) {
-            // get the products folder in media collection
-
+          if (blog_image_id) {
+            // get the blogs folder in media collection
             const folder = await req.payload.find({
               collection: 'payload-folders',
               where: {
@@ -53,10 +61,10 @@ export const Products: CollectionConfig = {
               },
             })
             if (folder && folder.docs[0]) {
-              // move the product_image into products folder
+              // move the blog_image into blogs folder
               await req.payload.update({
                 collection: 'media',
-                id: product_image_id.id,
+                id: blog_image_id.id,
                 data: {
                   folder: { id: folder.docs[0].id },
                 },

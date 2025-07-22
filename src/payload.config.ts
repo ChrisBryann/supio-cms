@@ -10,6 +10,7 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { Products } from './collections/products/config'
+import { Blogs } from './collections/blogs/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -20,8 +21,19 @@ export default buildConfig({
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    autoLogin:
+      process.env.NODE_ENV === 'development'
+        ? {
+            email: 'test@example.com',
+            password: 'test',
+            prefillOnly: true,
+          }
+        : false,
+    components: {
+      beforeLogin: [],
+    },
   },
-  collections: [Users, Media, Products],
+  collections: [Users, Media, Products, Blogs],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -31,10 +43,14 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URI || '',
     },
+    idType: 'uuid',
   }),
   sharp,
   plugins: [
     payloadCloudPlugin(),
     // storage-adapter-placeholder
   ],
+  folders: {
+    collectionSpecific: false, // disabling this because of postgres empty enum query error, see https://github.com/payloadcms/payload/discussions/13222
+  },
 })
