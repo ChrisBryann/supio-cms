@@ -129,6 +129,9 @@ export interface UserAuthOperations {
  */
 export interface User {
   id: string;
+  first_name: string;
+  last_name: string;
+  roles?: ('admin' | 'editor' | 'viewer')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -312,6 +315,9 @@ export interface PayloadMigration {
  * via the `definition` "users_select".
  */
 export interface UsersSelect<T extends boolean = true> {
+  first_name?: T;
+  last_name?: T;
+  roles?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
@@ -354,7 +360,6 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "products_select".
  */
 export interface ProductsSelect<T extends boolean = true> {
-  id?: T;
   name?: T;
   main_description?: T;
   additional_description?: T;
