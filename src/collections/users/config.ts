@@ -5,6 +5,7 @@ import { viewer } from './access/viewer'
 import { admin } from './access/admin'
 import { checkRole } from './access/check-role'
 import type { User } from '@/payload-types'
+import { SendResetPassswordEmail } from './hooks/send-reset-password'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -111,4 +112,7 @@ export const Users: CollectionConfig = {
       },
     },
   ],
+  hooks: {
+    afterOperation: [SendResetPassswordEmail],
+  },
 }

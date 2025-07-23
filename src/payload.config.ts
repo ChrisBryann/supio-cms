@@ -13,6 +13,8 @@ import { Blogs } from './collections/blogs/config'
 import { en } from '@payloadcms/translations/languages/en'
 import { ko } from '@payloadcms/translations/languages/ko'
 
+import { resendAdapter } from '@payloadcms/email-resend'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -22,6 +24,11 @@ export default buildConfig({
   // cors: {
   //   origins: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
   // },
+  email: resendAdapter({
+    defaultFromAddress: 'cms@sci-aesthetics.com',
+    defaultFromName: 'SCI Aesthetics CMS',
+    apiKey: process.env.RESEND_API_KEY || '',
+  }),
   i18n: {
     fallbackLanguage: 'en',
     supportedLanguages: { en, ko },

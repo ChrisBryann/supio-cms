@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload'
 import { editor } from './access/editor'
 import { viewer } from './access/viewer'
 import { admin } from './access/admin'
+import { ImageFolderClassifier } from '@/hooks/image-folder-classifier'
 
 export const Products: CollectionConfig = {
   slug: 'products',
@@ -25,6 +26,7 @@ export const Products: CollectionConfig = {
       label: 'Name',
       type: 'text',
       required: true,
+      index: true,
     },
     {
       name: 'main_description',
@@ -46,42 +48,6 @@ export const Products: CollectionConfig = {
     },
   ],
   hooks: {
-    beforeOperation: [
-      async ({ req, operation, collection }) => {
-        if (
-          (operation === 'create' || operation === 'update') &&
-          req.data &&
-          req.data.product_image
-        ) {
-          // find the image object in the media collection
-          const product_image_id = await req.payload.findByID({
-            collection: 'media',
-            id: req.data.product_image as string,
-          })
-          if (product_image_id) {
-            // get the products folder in media collection
-
-            const folder = await req.payload.find({
-              collection: 'payload-folders',
-              where: {
-                name: {
-                  equals: collection.slug.toLowerCase(),
-                },
-              },
-            })
-            if (folder && folder.docs[0]) {
-              // move the product_image into products folder
-              await req.payload.update({
-                collection: 'media',
-                id: product_image_id.id,
-                data: {
-                  folder: { id: folder.docs[0].id },
-                },
-              })
-            }
-          }
-        }
-      },
-    ],
+    afterChange: [ImageFolderClassifier('product')],
   },
 }

@@ -2,6 +2,8 @@ import { CollectionConfig } from 'payload'
 import { author } from './access/author'
 import { editor } from './access/editor'
 import { admin } from './access/admin'
+import { ImageFolderClassifier } from '@/hooks/image-folder-classifier'
+import { RichTextImageFolderClassifier } from '@/hooks/rich-text-image-folder-classifier'
 
 export const Blogs: CollectionConfig = {
   slug: 'blogs',
@@ -37,6 +39,7 @@ export const Blogs: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+      index: true,
     },
     {
       name: 'content',
@@ -60,37 +63,6 @@ export const Blogs: CollectionConfig = {
     drafts: true,
   },
   hooks: {
-    beforeOperation: [
-      async ({ req, operation, collection }) => {
-        if ((operation === 'create' || operation === 'update') && req.data && req.data.blog_image) {
-          // find the image object in the media collection
-          const blog_image_id = await req.payload.findByID({
-            collection: 'media',
-            id: req.data.blog_image as string,
-          })
-          if (blog_image_id) {
-            // get the blogs folder in media collection
-            const folder = await req.payload.find({
-              collection: 'payload-folders',
-              where: {
-                name: {
-                  equals: collection.slug.toLowerCase(),
-                },
-              },
-            })
-            if (folder && folder.docs[0]) {
-              // move the blog_image into blogs folder
-              await req.payload.update({
-                collection: 'media',
-                id: blog_image_id.id,
-                data: {
-                  folder: { id: folder.docs[0].id },
-                },
-              })
-            }
-          }
-        }
-      },
-    ],
+    afterChange: [ImageFolderClassifier('blog'), RichTextImageFolderClassifier('content')],
   },
 }
