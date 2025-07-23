@@ -1,7 +1,7 @@
 // storage-adapter-import-placeholder
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { FixedToolbarFeature, lexicalEditor, LinkFeature } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -17,11 +17,11 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
-  csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
-  cors: {
-    origins: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
-  },
+  // serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
+  // csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
+  // cors: {
+  //   origins: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
+  // },
   i18n: {
     fallbackLanguage: 'en',
     supportedLanguages: { en, ko },
@@ -38,9 +38,22 @@ export default buildConfig({
       //   Icon: '',
       // },
     },
+    meta: {
+      titleSuffix: ' | SCI Aesthetics CMS',
+      title: 'Dashboard',
+      description: 'Access SCI Aesthetics CMS dashboard.',
+      // icons: [ // update this when you have the icon file
+      //   {
+      //     url: '',
+      //     rel: 'icon',
+      //   },
+      // ],
+    },
   },
   collections: [Users, Media, Products, Blogs],
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features: ({ defaultFeatures }) => [...defaultFeatures, FixedToolbarFeature()],
+  }),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),

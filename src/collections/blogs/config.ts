@@ -1,7 +1,25 @@
 import { CollectionConfig } from 'payload'
+import { author } from './access/author'
+import { editor } from './access/editor'
+import { admin } from './access/admin'
 
 export const Blogs: CollectionConfig = {
   slug: 'blogs',
+  access: {
+    create: editor,
+    read: author,
+    update: editor,
+    delete: admin,
+  },
+  admin: {
+    useAsTitle: 'title',
+    enableRichTextLink: true,
+    hideAPIURL: process.env.NODE_ENV === 'production',
+    defaultColumns: ['title', 'category', 'author', 'createdAt'],
+    meta: {
+      description: 'Blogs colllection',
+    },
+  },
   fields: [
     {
       name: 'author',

@@ -1,7 +1,24 @@
 import { CollectionConfig } from 'payload'
+import { editor } from './access/editor'
+import { viewer } from './access/viewer'
+import { admin } from './access/admin'
 
 export const Products: CollectionConfig = {
   slug: 'products',
+  access: {
+    create: editor,
+    read: viewer,
+    update: editor,
+    delete: admin,
+  },
+  admin: {
+    useAsTitle: 'name',
+    hideAPIURL: process.env.NODE_ENV === 'production',
+    defaultColumns: ['name', 'main_description', 'product_image', 'createdAt'],
+    meta: {
+      description: 'Products colllection',
+    },
+  },
   fields: [
     {
       name: 'name',

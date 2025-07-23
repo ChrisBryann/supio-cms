@@ -104,7 +104,7 @@ export const Users: CollectionConfig = {
         { label: 'Viewer', value: 'viewer' },
       ],
       hooks: {
-        beforeChange: [protectRoles],
+        beforeChange: [protectRoles], // comment this protectRoles hook to prevent Admin role not being added when user is created
       },
       access: {
         update: ({ req: { user } }) => checkRole(['admin'], user as User),
