@@ -157,10 +157,6 @@ export interface User {
 export interface Media {
   id: string;
   alt: string;
-  collection?: {
-    relationTo: 'products';
-    value: string | Product;
-  } | null;
   folder?: (string | null) | FolderInterface;
   updatedAt: string;
   createdAt: string;
@@ -173,19 +169,6 @@ export interface Media {
   height?: number | null;
   focalX?: number | null;
   focalY?: number | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "products".
- */
-export interface Product {
-  id: string;
-  name: string;
-  main_description: string;
-  additional_description?: string | null;
-  product_image: string | Media;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -209,6 +192,19 @@ export interface FolderInterface {
     hasNextPage?: boolean;
     totalDocs?: number;
   };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "products".
+ */
+export interface Product {
+  id: string;
+  name: string;
+  main_description: string;
+  additional_description?: string | null;
+  product_image: string | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -341,7 +337,6 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
-  collection?: T;
   folder?: T;
   updatedAt?: T;
   createdAt?: T;
