@@ -14,7 +14,7 @@ export const Products: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
-    hideAPIURL: process.env.NODE_ENV === 'production',
+    hideAPIURL: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production',
     defaultColumns: ['name', 'main_description', 'product_image', 'createdAt'],
     meta: {
       description: 'Products colllection',

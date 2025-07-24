@@ -21,7 +21,7 @@ export const Users: CollectionConfig = {
   auth: {
     cookies: {
       sameSite: 'Strict',
-      secure: process.env.NODE_ENV !== 'development',
+      secure: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'development',
       // domain: process.env.NEXT_PUBLIC_VERCEL_URL || '',
     },
     // strategies: [
