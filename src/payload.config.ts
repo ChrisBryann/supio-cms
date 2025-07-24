@@ -19,11 +19,11 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  // serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
-  // csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
-  // cors: {
-  //   origins: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
-  // },
+  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
+  csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
+  cors: {
+    origins: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
+  },
   email: resendAdapter({
     defaultFromAddress: 'cms@sci-aesthetics.com',
     defaultFromName: 'SCI Aesthetics CMS',
@@ -40,10 +40,9 @@ export default buildConfig({
     },
     components: {
       // beforeLogin: [],
-      // graphics: {
-      //   Logo: '',
-      //   Icon: '',
-      // },
+      graphics: {
+        Logo: { path: '/components/Logo.tsx', exportName: 'Logo' },
+      },
     },
     meta: {
       titleSuffix: ' | SCI Aesthetics CMS',
