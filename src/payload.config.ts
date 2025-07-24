@@ -21,10 +21,10 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_SERVER_URL || '',
-  csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
+  serverURL: process.env.NEXT_PUBLIC_VERCEL_URL || '',
+  csrf: [process.env.NEXT_PUBLIC_VERCEL_URL || '', process.env.NEXT_PUBLIC_FRONTEND_URL || ''],
   cors: {
-    origins: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
+    origins: [process.env.NEXT_PUBLIC_VERCEL_URL || '', process.env.NEXT_PUBLIC_FRONTEND_URL || ''],
   },
   routes: {
     admin: '/', // make admin route point to base path because we don't need the frontend
@@ -47,18 +47,23 @@ export default buildConfig({
       // beforeLogin: [],
       graphics: {
         Logo: { path: '/components/Logo#Logo', exportName: 'Logo' },
+        // Icon: { path: '/components/Icon#Icon', exportName: 'Icon' },
       },
     },
     meta: {
       titleSuffix: ' | SCI Aesthetics CMS',
       title: 'Dashboard',
       description: 'Access SCI Aesthetics CMS dashboard.',
-      // icons: [ // update this when you have the icon file
-      //   {
-      //     url: '',
-      //     rel: 'icon',
-      //   },
-      // ],
+      defaultOGImageType: 'static',
+      icons: [
+        // update this when you have the icon file
+        {
+          url: 'favicon.ico',
+          sizes: '32x32',
+          type: 'image/ico',
+          rel: 'icon',
+        },
+      ],
     },
   },
   collections: [Users, Media, Products, Blogs],
