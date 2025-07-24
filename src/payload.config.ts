@@ -25,7 +25,7 @@ export default buildConfig({
     origins: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
   },
   email: resendAdapter({
-    defaultFromAddress: 'cms@sci-aesthetics.com',
+    defaultFromAddress: 'admin@cms.sci-aesthetics.com',
     defaultFromName: 'SCI Aesthetics CMS',
     apiKey: process.env.RESEND_API_KEY || '',
   }),
