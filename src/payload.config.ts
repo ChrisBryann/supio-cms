@@ -15,6 +15,8 @@ import { ko } from '@payloadcms/translations/languages/ko'
 
 import { resendAdapter } from '@payloadcms/email-resend'
 
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -23,6 +25,9 @@ export default buildConfig({
   csrf: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
   cors: {
     origins: [process.env.NEXT_PUBLIC_SERVER_URL || ''],
+  },
+  routes: {
+    admin: '/', // make admin route point to base path because we don't need the frontend
   },
   email: resendAdapter({
     defaultFromAddress: 'admin@cms.sci-aesthetics.com',
@@ -41,7 +46,7 @@ export default buildConfig({
     components: {
       // beforeLogin: [],
       graphics: {
-        Logo: { path: '/components/Logo.tsx', exportName: 'Logo' },
+        Logo: { path: '/components/Logo#Logo', exportName: 'Logo' },
       },
     },
     meta: {
@@ -74,6 +79,16 @@ export default buildConfig({
   plugins: [
     payloadCloudPlugin(),
     // storage-adapter-placeholder
+    vercelBlobStorage({
+      enabled: true,
+      collections: {
+        media: true,
+      },
+      token:
+        process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+          ? process.env.BLOB_READ_WRITE_TOKEN
+          : process.env.BLOB_DEV_READ_WRITE_TOKEN,
+    }),
   ],
   folders: {
     collectionSpecific: false, // disabling this because of postgres empty enum query error, see https://github.com/payloadcms/payload/discussions/13222
