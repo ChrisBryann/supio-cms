@@ -22,7 +22,7 @@ export const Users: CollectionConfig = {
     cookies: {
       sameSite: 'Strict',
       secure: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'development',
-      domain: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || '',
+      domain: process.env.NEXT_PUBLIC_VERCEL_URL || '',
     },
     // strategies: [
     //   {
