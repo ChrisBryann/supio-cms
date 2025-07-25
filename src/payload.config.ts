@@ -21,10 +21,19 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  serverURL: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || '',
-  csrf: [`https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || ''],
+  serverURL:
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`
+      : `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || '',
+  csrf: [
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`
+      : `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || '',
+  ],
   cors: [
-    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || '',
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL}`
+      : `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || '',
     process.env.NEXT_PUBLIC_FRONTEND_URL || '',
   ],
   routes: {
