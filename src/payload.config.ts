@@ -22,8 +22,11 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   serverURL: `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || '',
-  csrf: [`https://${process.env.NEXT_PUBLIC_VERCEL_URL}`  || '', process.env.NEXT_PUBLIC_FRONTEND_URL || ''],
-  cors: [`https://${process.env.NEXT_PUBLIC_VERCEL_URL}`  || '', process.env.NEXT_PUBLIC_FRONTEND_URL || ''],
+  csrf: [`https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || ''],
+  cors: [
+    `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` || '',
+    process.env.NEXT_PUBLIC_FRONTEND_URL || '',
+  ],
   routes: {
     admin: '/', // make admin route point to base path because we don't need the frontend
   },
