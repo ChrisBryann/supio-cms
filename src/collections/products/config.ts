@@ -1,13 +1,32 @@
 import { CollectionConfig } from 'payload'
+import { editor } from './access/editor'
+import { viewer } from './access/viewer'
+import { admin } from './access/admin'
+import { ImageFolderClassifier } from '@/hooks/image-folder-classifier'
 
 export const Products: CollectionConfig = {
   slug: 'products',
+  access: {
+    create: editor,
+    read: viewer,
+    update: editor,
+    delete: admin,
+  },
+  admin: {
+    useAsTitle: 'name',
+    hideAPIURL: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production',
+    defaultColumns: ['name', 'main_description', 'product_image', 'createdAt'],
+    meta: {
+      description: 'Products colllection',
+    },
+  },
   fields: [
     {
       name: 'name',
       label: 'Name',
       type: 'text',
       required: true,
+      index: true,
     },
     {
       name: 'main_description',
@@ -28,4 +47,7 @@ export const Products: CollectionConfig = {
       required: true,
     },
   ],
+  hooks: {
+    afterChange: [ImageFolderClassifier('product')],
+  },
 }

@@ -50,4 +50,4 @@ node_modules/
 /playwright/.cache/
 
 # media files
-media
+/media
