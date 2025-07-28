@@ -216,6 +216,7 @@ export interface Blog {
   id: string;
   author: string | User;
   title: string;
+  overview: string;
   content: {
     root: {
       type: string;
@@ -231,7 +232,7 @@ export interface Blog {
     };
     [k: string]: unknown;
   };
-  category: string;
+  tags: string;
   blog_image: string | Media;
   updatedAt: string;
   createdAt: string;
@@ -369,8 +370,9 @@ export interface ProductsSelect<T extends boolean = true> {
 export interface BlogsSelect<T extends boolean = true> {
   author?: T;
   title?: T;
+  overview?: T;
   content?: T;
-  category?: T;
+  tags?: T;
   blog_image?: T;
   updatedAt?: T;
   createdAt?: T;

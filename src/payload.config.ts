@@ -16,6 +16,7 @@ import { ko } from '@payloadcms/translations/languages/ko'
 import { resendAdapter } from '@payloadcms/email-resend'
 
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
+import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -82,6 +83,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
     idType: 'uuid',
+    prodMigrations: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? migrations : undefined,
   }),
   sharp,
   plugins: [
