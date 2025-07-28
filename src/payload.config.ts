@@ -83,7 +83,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
     idType: 'uuid',
-    prodMigrations: migrations,
+    prodMigrations: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? migrations : undefined,
   }),
   sharp,
   plugins: [
