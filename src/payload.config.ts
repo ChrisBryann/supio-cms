@@ -22,14 +22,21 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  serverURL: `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`,
+  serverURL: process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`
+    : 'http://localhost:3000',
   csrf: [
-    `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`,
+    process.env.NEXT_PUBLIC_VERCEL_URL
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`
+      : 'http://localhost:3000',
   ],
   cors: [
-    `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`,
+    process.env.NEXT_PUBLIC_VERCEL_URL
+      ? `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`
+      : 'http://localhost:3000',
     process.env.NEXT_PUBLIC_FRONTEND_URL || '',
   ],
+  cookiePrefix: process.env.COOKIE_PREFIX,
   routes: {
     admin: '/', // make admin route point to base path because we don't need the frontend
   },
@@ -101,6 +108,6 @@ export default buildConfig({
     }),
   ],
   folders: {
-    collectionSpecific: false, // disabling this because of postgres empty enum query error, see https://github.com/payloadcms/payload/discussions/13222
+    collectionSpecific: false, // disabling this because of postgres empty enum query error, see http://github.com/payloadcms/payload/discussions/13222
   },
 })

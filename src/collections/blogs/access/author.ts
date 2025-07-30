@@ -7,12 +7,17 @@ export const author: Access = ({ req: { user } }) => {
     if (checkRole(['admin', 'editor'], user)) {
       return true
     }
-    // author can only CRUD their own blogs
+    // author can read their own draft/published blogs and ALL other published blogs
     return {
-      and: [
+      or: [
         {
           author: {
             equals: user.id,
+          },
+        },
+        {
+          _status: {
+            equals: 'published',
           },
         },
       ],

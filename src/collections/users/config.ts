@@ -22,59 +22,12 @@ export const Users: CollectionConfig = {
     cookies: {
       sameSite: 'Strict',
       secure: process.env.NEXT_PUBLIC_VERCEL_ENV !== 'development',
-      domain:
-        process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      domain: process.env.NEXT_PUBLIC_VERCEL_URL
+        ? process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
           ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL
-          : process.env.NEXT_PUBLIC_VERCEL_URL || '',
+          : process.env.NEXT_PUBLIC_VERCEL_URL
+        : 'localhost',
     },
-    // strategies: [
-    //   {
-    //     name: 'supabase',
-    //     authenticate: async ({ headers, payload }) => {
-    //       const token = headers.get('Authorization')?.split(' ')[1]
-    //       if (!token) {
-    //         return {
-    //           user: null,
-    //         }
-    //       }
-    //       try {
-    //         const {
-    //           data: { user: supabaseUser },
-    //           error,
-    //         } = await supabaseClient.auth.getUser(token)
-    //         if (error || !supabaseUser) {
-    //           return {
-    //             user: null,
-    //           }
-    //         }
-
-    //         const user = await payload.find({
-    //           collection: 'users',
-    //           where: {
-    //             supabase_id: {
-    //               equals: supabaseUser.id,
-    //             },
-    //           },
-    //         })
-    //         return user.totalDocs > 0
-    //           ? {
-    //               user: {
-    //                 ...user.docs[0],
-    //                 collection: 'users',
-    //               },
-    //             }
-    //           : {
-    //               user: null,
-    //             }
-    //       } catch (error) {
-    //         console.log('Supabase Custom Strategy Error:', error)
-    //         return {
-    //           user: null,
-    //         }
-    //       }
-    //     },
-    //   },
-    // ],
   },
   fields: [
     // Email added by default
