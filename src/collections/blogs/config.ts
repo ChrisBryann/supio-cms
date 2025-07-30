@@ -17,7 +17,7 @@ export const Blogs: CollectionConfig = {
     useAsTitle: 'title',
     enableRichTextLink: true,
     hideAPIURL: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production',
-    defaultColumns: ['title', 'overview', 'tags', 'author', 'createdAt'],
+    defaultColumns: ['title', 'overview', 'tags', 'author', 'createdAt', '_status'],
     meta: {
       description: 'Blogs colllection',
     },
