@@ -1,4 +1,4 @@
-import type { Access } from 'payload'
+import type { Access, Where } from 'payload'
 import { checkRole } from './check-role'
 
 export const viewer: Access = ({ req: { user } }) => {
@@ -15,6 +15,6 @@ export const viewer: Access = ({ req: { user } }) => {
       },
     }
   }
-
-  return false
+  // anyone else (using REST API) can only see the first and last names of the user
+  return true
 }
