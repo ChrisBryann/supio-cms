@@ -1,7 +1,7 @@
 import type { Access, Where } from 'payload'
 import { checkRole } from './check-role'
 
-export const viewer: Access = ({ req: { user, host } }) => {
+export const viewer: Access = ({ req: { user, origin } }) => {
   if (user) {
     // checks if user is admin or editor
     if (checkRole(['admin', 'editor'], user)) {
@@ -16,5 +16,5 @@ export const viewer: Access = ({ req: { user, host } }) => {
     }
   }
   // requests from the frontend can only see the first and last names of the user (using afterRead hook), else public users cannot see
-  return host.includes(process.env.NEXT_PUBLIC_FRONTEND_URL!)
+  return origin.includes(process.env.NEXT_PUBLIC_FRONTEND_URL!)
 }
