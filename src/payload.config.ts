@@ -17,6 +17,7 @@ import { resendAdapter } from '@payloadcms/email-resend'
 
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { migrations } from './migrations'
+import { Partners } from './collections/partners/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -77,7 +78,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Products, Blogs],
+  collections: [Users, Media, Products, Blogs, Partners],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [...defaultFeatures, FixedToolbarFeature()],
   }),
