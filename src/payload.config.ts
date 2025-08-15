@@ -17,6 +17,7 @@ import { resendAdapter } from '@payloadcms/email-resend'
 
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { migrations } from './migrations'
+import { Partners } from './collections/partners/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -29,13 +30,13 @@ export default buildConfig({
     process.env.NEXT_PUBLIC_VERCEL_URL
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`
       : 'http://localhost:3000',
-  ],
+  ].filter(Boolean),
   cors: [
     process.env.NEXT_PUBLIC_VERCEL_URL
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`
       : 'http://localhost:3000',
     process.env.NEXT_PUBLIC_FRONTEND_URL || '',
-  ],
+  ].filter(Boolean),
   cookiePrefix: process.env.COOKIE_PREFIX,
   routes: {
     admin: '/', // make admin route point to base path because we don't need the frontend
@@ -77,7 +78,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Products, Blogs],
+  collections: [Users, Media, Products, Blogs, Partners],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [...defaultFeatures, FixedToolbarFeature()],
   }),

@@ -65,7 +65,7 @@ export const Blogs: CollectionConfig = {
     },
   ],
   versions: {
-    drafts: true,
+    drafts: true, // this causes the fields to be considered not required even if specified
   },
   hooks: {
     afterChange: [ImageFolderClassifier('blog'), RichTextImageFolderClassifier('content')],
