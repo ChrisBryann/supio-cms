@@ -1,0 +1,19 @@
+name: Keep Alive
+
+on:
+  schedule:
+    - cron: "0 0 * * 0,3" # Runs every Sunday and Wednesday
+  workflow_dispatch:
+
+jobs:
+  send-http-request:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      PAYLOAD_FRONTEND_SHARED_SECRET: ${{ secrets.PAYLOAD_FRONTEND_SHARED_SECRET }}
+
+    steps:
+      - name: Send HTTP Request
+        run: |
+          curl -H "Authorization: Bearer $PAYLOAD_FRONTEND_SHARED_SECRET" \
+            $SUPABASE_URL/keep-alive
