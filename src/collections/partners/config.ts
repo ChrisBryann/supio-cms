@@ -3,6 +3,7 @@ import { CollectionConfig } from 'payload'
 import { editor } from './access/editor'
 import { viewer } from './access/viewer'
 import { admin } from './access/admin'
+import { INDONESIA_CITY_AREAS } from '@/constants'
 
 export const Partners: CollectionConfig = {
   slug: 'partners',
@@ -34,7 +35,9 @@ export const Partners: CollectionConfig = {
     },
     {
       name: 'location',
-      type: 'text',
+      type: 'select',
+      hasMany: true,
+      options: INDONESIA_CITY_AREAS,
       required: true,
     },
   ],
