@@ -16,7 +16,7 @@ export async function GET(req: NextRequest) {
     // Fetch user data from Supabase to prevent Supabase project from pausing
     const { data, error } = await supabase.from('users').select()
     if (error) throw new Error(error.message)
-    return Response.json(data)
+    return Response.json({ ok: true})
   } catch (error) {
     const message = (error as Error).message ?? 'An error occurred.'
     return Response.json({ error: message }, { status: 400 })

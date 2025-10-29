@@ -9,11 +9,11 @@ jobs:
   send-http-request:
     runs-on: ubuntu-latest
     env:
-      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-      PAYLOAD_FRONTEND_SHARED_SECRET: ${{ secrets.PAYLOAD_FRONTEND_SHARED_SECRET }}
+      NEXT_PUBLIC_URL: ${{ github.ref == 'refs/head/main' && secrets.NEXT_PUBLIC_PROD_URL || secrets.NEXT_PUBLIC_DEV_URL }}
+      CRON_SECRET: ${{ secrets.CRON_SECRET }}
 
     steps:
       - name: Send HTTP Request
         run: |
-          curl -H "Authorization: Bearer $PAYLOAD_FRONTEND_SHARED_SECRET" \
-            $SUPABASE_URL/keep-alive
+          curl -H "Authorization: Bearer ${{ env.CRON_SECRET }}" \
+            "${{ env.NEXT_PUBLIC_URL }}/keep-alive"
