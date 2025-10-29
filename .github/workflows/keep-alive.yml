@@ -15,5 +15,5 @@ jobs:
     steps:
       - name: Send HTTP Request
         run: |
-          curl -H "Authorization: Bearer $PAYLOAD_FRONTEND_SHARED_SECRET" \
-            $SUPABASE_URL/keep-alive
+          curl -H "Authorization: Bearer ${{ env.PAYLOAD_FRONTEND_SHARED_SECRET }}" \
+            "${{ env.SUPABASE_URL }}/keep-alive"
