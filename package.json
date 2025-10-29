@@ -26,6 +26,8 @@
     "@payloadcms/storage-vercel-blob": "^3.48.0",
     "@payloadcms/translations": "^3.48.0",
     "@payloadcms/ui": "3.48.0",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.76.1",
     "cross-env": "^7.0.3",
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
