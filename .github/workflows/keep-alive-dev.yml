@@ -1,0 +1,19 @@
+name: Keep Alive (Development)
+
+on:
+  schedule:
+    - cron: "0 0 * * 0,3" # Runs every Sunday and Wednesday
+  workflow_dispatch:
+
+jobs:
+  send-http-request:
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_URL: ${{ secrets.NEXT_PUBLIC_DEV_URL }}
+      CRON_SECRET: ${{ secrets.CRON_SECRET }}
+
+    steps:
+      - name: Send HTTP Request
+        run: |
+          curl -H "Authorization: Bearer ${{ env.CRON_SECRET }}" \
+            "${{ env.NEXT_PUBLIC_URL }}/keep-alive"
