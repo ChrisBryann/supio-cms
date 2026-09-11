@@ -46,6 +46,17 @@ export const Products: CollectionConfig = {
       relationTo: 'media',
       required: true,
     },
+    {
+      name: 'brochure',
+      label: 'Brochure (PDF)',
+      type: 'upload',
+      relationTo: 'media',
+      filterOptions: {
+        mimeType: {
+          contains: 'pdf',
+        },
+      },
+    },
   ],
   hooks: {
     afterChange: [ImageFolderClassifier('product')],

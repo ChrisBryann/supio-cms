@@ -40,6 +40,13 @@ export const Partners: CollectionConfig = {
       options: INDONESIA_CITY_AREAS,
       required: true,
     },
+    {
+      name: 'show_at_landing',
+      label: 'Show at Website Landing Page?',
+      type: 'checkbox',
+      required: true,
+      defaultValue: false,
+    },
   ],
   hooks: {
     afterChange: [ImageFolderClassifier('partner')],

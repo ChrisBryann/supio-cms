@@ -25,16 +25,16 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   serverURL: process.env.NEXT_PUBLIC_VERCEL_URL
     ? `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : 'http://localhost:3000',
+    : 'http://localhost:3001',
   csrf: [
     process.env.NEXT_PUBLIC_VERCEL_URL
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`
-      : 'http://localhost:3000',
+      : 'http://localhost:3001',
   ].filter(Boolean),
   cors: [
     process.env.NEXT_PUBLIC_VERCEL_URL
       ? `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`
-      : 'http://localhost:3000',
+      : 'http://localhost:3001',
     process.env.NEXT_PUBLIC_FRONTEND_URL || '',
   ].filter(Boolean),
   cookiePrefix: process.env.COOKIE_PREFIX,

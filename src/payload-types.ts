@@ -200,6 +200,7 @@ export interface Product {
   main_description: string;
   additional_description?: string | null;
   product_image: string | Media;
+  brochure?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -576,6 +577,7 @@ export interface Partner {
     | 'Jambi Selatan'
     | 'Kota Baru (Jambi)'
   )[];
+  show_at_landing: boolean;
   updatedAt: string;
   createdAt: string;
 }
@@ -698,6 +700,7 @@ export interface ProductsSelect<T extends boolean = true> {
   main_description?: T;
   additional_description?: T;
   product_image?: T;
+  brochure?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -724,6 +727,7 @@ export interface PartnersSelect<T extends boolean = true> {
   name?: T;
   partner_image?: T;
   location?: T;
+  show_at_landing?: T;
   updatedAt?: T;
   createdAt?: T;
 }
