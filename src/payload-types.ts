@@ -200,6 +200,7 @@ export interface Product {
   main_description: string;
   additional_description?: string | null;
   product_image: string | Media;
+  brochure?: (string | null) | Media;
   updatedAt: string;
   createdAt: string;
 }
@@ -699,6 +700,7 @@ export interface ProductsSelect<T extends boolean = true> {
   main_description?: T;
   additional_description?: T;
   product_image?: T;
+  brochure?: T;
   updatedAt?: T;
   createdAt?: T;
 }
