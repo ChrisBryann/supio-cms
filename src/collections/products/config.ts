@@ -53,7 +53,7 @@ export const Products: CollectionConfig = {
       relationTo: 'media',
       filterOptions: {
         mimeType: {
-          contains: 'pdf',
+          equals: 'application/pdf',
         },
       },
     },
