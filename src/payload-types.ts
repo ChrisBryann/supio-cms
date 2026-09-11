@@ -576,6 +576,7 @@ export interface Partner {
     | 'Jambi Selatan'
     | 'Kota Baru (Jambi)'
   )[];
+  show_at_landing: boolean;
   updatedAt: string;
   createdAt: string;
 }
@@ -724,6 +725,7 @@ export interface PartnersSelect<T extends boolean = true> {
   name?: T;
   partner_image?: T;
   location?: T;
+  show_at_landing?: T;
   updatedAt?: T;
   createdAt?: T;
 }
