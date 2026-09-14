@@ -111,4 +111,9 @@ export default buildConfig({
   folders: {
     collectionSpecific: false, // disabling this because of postgres empty enum query error, see http://github.com/payloadcms/payload/discussions/13222
   },
+  upload: {
+    limits: {
+      fileSize: 50000000, // set limit of upload to 50MB
+    },
+  },
 })
