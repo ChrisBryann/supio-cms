@@ -7,6 +7,7 @@ import { checkRole } from './access/check-role'
 import type { User } from '@/payload-types'
 import { SendResetPassswordEmail } from './hooks/send-reset-password'
 import { anyone } from './access/anyone'
+import { isStaff } from '@/access/roles'
 
 export const Users: CollectionConfig = {
   slug: 'users',
@@ -38,7 +39,7 @@ export const Users: CollectionConfig = {
       type: 'email',
       required: true,
       access: {
-        read: ({ req: { user } }) => !!user, // only for authenticated users
+        read: ({ req: { user } }) => isStaff(user), // only for admin-panel users, never customers
       },
     },
     // Add more fields as needed
@@ -74,7 +75,7 @@ export const Users: CollectionConfig = {
         beforeChange: [protectRoles], // comment this protectRoles hook to prevent Admin role not being added when user is created
       },
       access: {
-        read: ({ req: { user } }) => !!user, // only for authenticated users
+        read: ({ req: { user } }) => isStaff(user), // only for admin-panel users, never customers
         update: ({ req: { user } }) => checkRole(['admin'], user as User),
       },
     },
@@ -83,8 +84,8 @@ export const Users: CollectionConfig = {
     afterOperation: [SendResetPassswordEmail],
     afterRead: [
       ({ req: { user }, doc }) => {
-        if (!user) {
-          // if user is not authenticated, only return first_name, last_name
+        if (!isStaff(user)) {
+          // if user is not an admin-panel user (public or customer), only return first_name, last_name
           const { updatedAt, createdAt, ...rest } = doc
           return rest
         }

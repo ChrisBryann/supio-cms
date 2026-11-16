@@ -1,8 +1,9 @@
 import type { User } from '@/payload-types'
 import type { FieldHook } from 'payload'
+import { checkRole } from '../access/check-role'
 
 export const protectRoles: FieldHook<{ id: string } & User> = ({ req, data }) => {
-  const isAdmin = req.user?.roles?.includes('admin')
+  const isAdmin = checkRole(['admin'], req.user)
 
   if (!isAdmin) {
     return ['viewer']

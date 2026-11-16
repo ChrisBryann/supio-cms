@@ -2,7 +2,8 @@ import type { Access } from 'payload'
 import { checkRole } from './check-role'
 
 export const viewer: Access = ({ req: { user, origin, payloadAPI, headers } }) => {
-  if (user) {
+  // A logged-in customer (collection `customers`) is treated like a public visitor here.
+  if (user && user.collection === 'users') {
     // checks if user is admin or editor
     if (checkRole(['admin', 'editor'], user)) {
       return true

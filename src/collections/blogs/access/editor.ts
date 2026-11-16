@@ -2,7 +2,8 @@ import { checkRole } from '@/collections/users/access/check-role'
 import type { Access } from 'payload'
 
 export const editor: Access = ({ req: { user } }) => {
-  if (user) {
+  // only admin-panel users; a logged-in customer must never be able to create/edit blogs
+  if (user && user.collection === 'users') {
     // admin and editor have full access to create/edit blogs
     if (checkRole(['admin', 'editor'], user)) {
       return true
