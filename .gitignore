@@ -11,6 +11,8 @@
 
 # testing
 /coverage
+# local throwaway test database (make test-db-up)
+/.testdb/
 
 # next.js
 /.next/
