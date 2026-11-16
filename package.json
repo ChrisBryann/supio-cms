@@ -18,6 +18,7 @@
     "test:int": "cross-env NODE_OPTIONS=--no-deprecation vitest run --config ./vitest.config.mts"
   },
   "dependencies": {
+    "@mux/mux-node": "^15.5.0",
     "@payloadcms/db-postgres": "3.48.0",
     "@payloadcms/email-resend": "^3.48.0",
     "@payloadcms/next": "3.48.0",
@@ -32,6 +33,7 @@
     "dotenv": "16.4.7",
     "graphql": "^16.8.1",
     "next": "15.4.11",
+    "openid-client": "^6.9.0",
     "payload": "3.48.0",
     "react": "19.1.0",
     "react-dom": "^19.1.0",

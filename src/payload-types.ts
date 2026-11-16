@@ -64,6 +64,7 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    customers: CustomerAuthOperations;
   };
   blocks: {};
   collections: {
@@ -72,12 +73,21 @@ export interface Config {
     products: Product;
     blogs: Blog;
     partners: Partner;
+    customers: Customer;
+    seminars: Seminar;
+    purchases: Purchase;
     'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {
+    customers: {
+      purchases: 'purchases';
+    };
+    seminars: {
+      purchases: 'purchases';
+    };
     'payload-folders': {
       documentsAndFolders: 'payload-folders' | 'media';
     };
@@ -88,6 +98,9 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
+    customers: CustomersSelect<false> | CustomersSelect<true>;
+    seminars: SeminarsSelect<false> | SeminarsSelect<true>;
+    purchases: PurchasesSelect<false> | PurchasesSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -99,15 +112,37 @@ export interface Config {
   globals: {};
   globalsSelect: {};
   locale: null;
-  user: User & {
-    collection: 'users';
-  };
+  user:
+    | (User & {
+        collection: 'users';
+      })
+    | (Customer & {
+        collection: 'customers';
+      });
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
 export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface CustomerAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -582,6 +617,130 @@ export interface Partner {
   createdAt: string;
 }
 /**
+ * People who can sign in to the website with Google or Yahoo. Add a customer here with the email they paid with; sign-in never creates one.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customers".
+ */
+export interface Customer {
+  id: string;
+  /**
+   * The Google or Yahoo email the customer paid with. Stored in lowercase.
+   */
+  email: string;
+  name?: string | null;
+  /**
+   * Shown in the video watermark. Search this code to find who a leaked recording belongs to. Generated automatically.
+   */
+  watermarkCode?: string | null;
+  /**
+   * Set from the Google/Yahoo profile at sign-in.
+   */
+  avatarUrl?: string | null;
+  /**
+   * Saved automatically the first time this customer signs in with Google.
+   */
+  googleSub?: string | null;
+  /**
+   * Saved automatically the first time this customer signs in with Yahoo.
+   */
+  yahooSub?: string | null;
+  purchases?: {
+    docs?: (string | Purchase)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Each purchase gives one customer lifetime access to one seminar. To refund, set the status to "revoked" instead of deleting, so you keep a record.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "purchases".
+ */
+export interface Purchase {
+  id: string;
+  title?: string | null;
+  /**
+   * Start typing the customer’s email. Not in the list? Create the customer first.
+   */
+  customer: string | Customer;
+  customerEmail?: string | null;
+  seminar: string | Seminar;
+  /**
+   * Set to "revoked" after a refund. The customer loses access immediately.
+   */
+  status: 'active' | 'revoked';
+  /**
+   * Payment / order ID from the external payment platform.
+   */
+  paymentReference?: string | null;
+  /**
+   * Internal notes. Never shown to the customer.
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seminars".
+ */
+export interface Seminar {
+  id: string;
+  title: string;
+  /**
+   * Used in the website URL, e.g. /seminars/my-seminar. Leave empty to generate it from the title.
+   */
+  slug: string;
+  /**
+   * Only published seminars appear on the website.
+   */
+  published?: boolean | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  speaker?: string | null;
+  /**
+   * When the seminar was held.
+   */
+  seminarDate?: string | null;
+  duration?: string | null;
+  thumbnail?: (string | null) | Media;
+  /**
+   * Display only.
+   */
+  priceLabel?: string | null;
+  /**
+   * Link to the external payment page for this seminar.
+   */
+  purchaseUrl?: string | null;
+  /**
+   * From the Mux dashboard (asset → Playback IDs, policy "signed"). Never sent to customers.
+   */
+  muxPlaybackId: string;
+  purchases?: {
+    docs?: (string | Purchase)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
@@ -609,14 +768,31 @@ export interface PayloadLockedDocument {
         value: string | Partner;
       } | null)
     | ({
+        relationTo: 'customers';
+        value: string | Customer;
+      } | null)
+    | ({
+        relationTo: 'seminars';
+        value: string | Seminar;
+      } | null)
+    | ({
+        relationTo: 'purchases';
+        value: string | Purchase;
+      } | null)
+    | ({
         relationTo: 'payload-folders';
         value: string | FolderInterface;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'customers';
+        value: string | Customer;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -626,10 +802,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: string;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'customers';
+        value: string | Customer;
+      };
   key?: string | null;
   value?:
     | {
@@ -728,6 +909,56 @@ export interface PartnersSelect<T extends boolean = true> {
   partner_image?: T;
   location?: T;
   show_at_landing?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customers_select".
+ */
+export interface CustomersSelect<T extends boolean = true> {
+  email?: T;
+  name?: T;
+  watermarkCode?: T;
+  avatarUrl?: T;
+  googleSub?: T;
+  yahooSub?: T;
+  purchases?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seminars_select".
+ */
+export interface SeminarsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  published?: T;
+  description?: T;
+  speaker?: T;
+  seminarDate?: T;
+  duration?: T;
+  thumbnail?: T;
+  priceLabel?: T;
+  purchaseUrl?: T;
+  muxPlaybackId?: T;
+  purchases?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "purchases_select".
+ */
+export interface PurchasesSelect<T extends boolean = true> {
+  title?: T;
+  customer?: T;
+  customerEmail?: T;
+  seminar?: T;
+  status?: T;
+  paymentReference?: T;
+  notes?: T;
   updatedAt?: T;
   createdAt?: T;
 }
