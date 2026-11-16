@@ -8,5 +8,8 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: ['./vitest.setup.ts'],
     include: ['tests/int/**/*.int.spec.ts'],
+    // The integration suites share one database and Payload creates its schema on first connect;
+    // running files in parallel races that schema creation on a fresh database.
+    fileParallelism: false,
   },
 })
