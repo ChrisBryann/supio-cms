@@ -21,6 +21,8 @@ import { Partners } from './collections/partners/config'
 import { Customers } from './collections/customers/config'
 import { Seminars } from './collections/seminars/config'
 import { Purchases } from './collections/purchases/config'
+import { LegalPages } from './collections/legal-pages/config'
+import { CompanyInfo } from './globals/company-info'
 import { extraCorsHeaders, getAllowedOrigins, getServerUrl, isProduction } from './lib/env'
 import { purchasesActiveUniqueIndex } from './db/purchases-active-unique'
 
@@ -77,7 +79,8 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Products, Blogs, Partners, Customers, Seminars, Purchases],
+  collections: [Users, Media, Products, Blogs, Partners, Customers, Seminars, Purchases, LegalPages],
+  globals: [CompanyInfo],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [...defaultFeatures, FixedToolbarFeature()],
   }),

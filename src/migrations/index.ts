@@ -6,6 +6,7 @@ import * as migration_20251029_045228 from './20251029_045228';
 import * as migration_20260911_063108 from './20260911_063108';
 import * as migration_20260911_090152 from './20260911_090152';
 import * as migration_20261116_065038_paid_seminars from './20261116_065038_paid_seminars';
+import * as migration_20261117_121031_legal_pages from './20261117_121031_legal_pages';
 
 export const migrations = [
   {
@@ -46,6 +47,11 @@ export const migrations = [
   {
     up: migration_20261116_065038_paid_seminars.up,
     down: migration_20261116_065038_paid_seminars.down,
-    name: '20261116_065038_paid_seminars'
+    name: '20261116_065038_paid_seminars',
+  },
+  {
+    up: migration_20261117_121031_legal_pages.up,
+    down: migration_20261117_121031_legal_pages.down,
+    name: '20261117_121031_legal_pages'
   },
 ];

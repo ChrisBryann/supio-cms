@@ -2,6 +2,7 @@ import type { Access, CollectionConfig, FieldAccess } from 'payload'
 import { isStaff, staffAdmin, staffEditor } from '@/access/roles'
 import { refreshPurchaseTitles } from '../purchases/hooks/set-title'
 import { playSeminar } from '@/endpoints/play-seminar'
+import { slugField } from '@/fields/slug'
 
 /** Staff see everything (incl. drafts); customers and the public see published seminars only. */
 const readSeminars: Access = ({ req: { user } }) => {
@@ -11,14 +12,6 @@ const readSeminars: Access = ({ req: { user } }) => {
 
 /** muxPlaybackId is never sent to customers or the public (REST, GraphQL, where-queries). */
 const staffOnlyField: FieldAccess = ({ req: { user } }) => isStaff(user)
-
-const slugify = (input: string) =>
-  input
-    .normalize('NFKD')
-    .replace(/[̀-ͯ]/g, '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '')
 
 export const Seminars: CollectionConfig = {
   slug: 'seminars',
@@ -44,30 +37,10 @@ export const Seminars: CollectionConfig = {
       required: true,
       index: true,
     },
-    {
-      name: 'slug',
-      type: 'text',
-      required: true,
-      unique: true,
-      index: true,
-      admin: {
-        position: 'sidebar',
-        description:
-          'Used in the website URL, e.g. /seminars/my-seminar. Leave empty to generate it from the title.',
-      },
-      hooks: {
-        beforeValidate: [
-          ({ value, data }) => {
-            const source = typeof value === 'string' && value.trim() ? value : data?.title
-            return typeof source === 'string' ? slugify(source) : value
-          },
-        ],
-      },
-      validate: (value: string | null | undefined) =>
-        !value || /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(value)
-          ? true
-          : 'Use lowercase letters, numbers and dashes only.',
-    },
+    slugField({
+      description:
+        'Used in the website URL, e.g. /seminars/my-seminar. Leave empty to generate it from the title.',
+    }),
     {
       name: 'published',
       type: 'checkbox',

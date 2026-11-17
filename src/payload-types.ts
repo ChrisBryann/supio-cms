@@ -76,6 +76,7 @@ export interface Config {
     customers: Customer;
     seminars: Seminar;
     purchases: Purchase;
+    'legal-pages': LegalPage;
     'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -101,6 +102,7 @@ export interface Config {
     customers: CustomersSelect<false> | CustomersSelect<true>;
     seminars: SeminarsSelect<false> | SeminarsSelect<true>;
     purchases: PurchasesSelect<false> | PurchasesSelect<true>;
+    'legal-pages': LegalPagesSelect<false> | LegalPagesSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -109,8 +111,12 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'company-info': CompanyInfo;
+  };
+  globalsSelect: {
+    'company-info': CompanyInfoSelect<false> | CompanyInfoSelect<true>;
+  };
   locale: null;
   user:
     | (User & {
@@ -741,6 +747,125 @@ export interface Seminar {
   createdAt: string;
 }
 /**
+ * Privacy policy, terms of service and other legal pages shown on the website. Use the slugs "privacy-policy" and "terms" for those two pages. Company name and contact details come from Website → Company info.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages".
+ */
+export interface LegalPage {
+  id: string;
+  title: string;
+  /**
+   * Used in the website URL, e.g. /privacy-policy. Use "privacy-policy" and "terms" for those two pages.
+   */
+  slug: string;
+  /**
+   * Shown under the title as "Terakhir diperbarui". Change it when the content changes meaningfully.
+   */
+  lastUpdated: string;
+  /**
+   * Optional. Short description for search engines and link previews (about 150 characters).
+   */
+  metaDescription?: string | null;
+  /**
+   * Linked at the bottom of the page, e.g. the terms page links to the privacy policy.
+   */
+  relatedPages?: (string | LegalPage)[] | null;
+  /**
+   * Opening paragraphs above section 1. You can link to the other legal page here.
+   */
+  intro?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Numbered automatically in this order (1., 2., 3., …). Drag to reorder. The table of contents is built from these headings.
+   */
+  sections: {
+    heading: string;
+    /**
+     * Link name for the table of contents (yoursite.com/privacy-policy#watermark). Leave empty to use the heading. Changing it breaks existing links to this section.
+     */
+    anchor?: string | null;
+    /**
+     * Shown in this order. Text for paragraphs and lists; Subheading for "a.", "b."; Table; Contact card for the company contact details.
+     */
+    body: (
+      | {
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'text';
+        }
+      | {
+          /**
+           * Lettered automatically on the website (a., b., c., …) in the order they appear in this section.
+           */
+          heading: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'subheading';
+        }
+      | {
+          /**
+           * Column headers, left to right, e.g. "Tujuan" and "Dasar pemrosesan".
+           */
+          columns: {
+            label: string;
+            id?: string | null;
+          }[];
+          /**
+           * Each row needs one cell per column, in the same order.
+           */
+          rows: {
+            cells: {
+              text: string;
+              id?: string | null;
+            }[];
+            id?: string | null;
+          }[];
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'table';
+        }
+      | {
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'contactCard';
+        }
+    )[];
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
@@ -778,6 +903,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'purchases';
         value: string | Purchase;
+      } | null)
+    | ({
+        relationTo: 'legal-pages';
+        value: string | LegalPage;
       } | null)
     | ({
         relationTo: 'payload-folders';
@@ -964,6 +1093,75 @@ export interface PurchasesSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages_select".
+ */
+export interface LegalPagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  lastUpdated?: T;
+  metaDescription?: T;
+  relatedPages?: T;
+  intro?: T;
+  sections?:
+    | T
+    | {
+        heading?: T;
+        anchor?: T;
+        body?:
+          | T
+          | {
+              text?:
+                | T
+                | {
+                    content?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              subheading?:
+                | T
+                | {
+                    heading?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              table?:
+                | T
+                | {
+                    columns?:
+                      | T
+                      | {
+                          label?: T;
+                          id?: T;
+                        };
+                    rows?:
+                      | T
+                      | {
+                          cells?:
+                            | T
+                            | {
+                                text?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              contactCard?:
+                | T
+                | {
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-folders_select".
  */
 export interface PayloadFoldersSelect<T extends boolean = true> {
@@ -1004,6 +1202,39 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Company name, address and WhatsApp contact shown on legal pages (contact card and page header).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "company-info".
+ */
+export interface CompanyInfo {
+  id: string;
+  legalName: string;
+  /**
+   * Shown in brackets under the company name, e.g. "(SCI Aesthetics)".
+   */
+  brandName?: string | null;
+  address: string;
+  whatsappUrl: string;
+  whatsappLabel: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "company-info_select".
+ */
+export interface CompanyInfoSelect<T extends boolean = true> {
+  legalName?: T;
+  brandName?: T;
+  address?: T;
+  whatsappUrl?: T;
+  whatsappLabel?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

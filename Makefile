@@ -104,6 +104,12 @@ migrate-down: ## Roll back the last migration (asks first)
 	$(call confirm_db,ROLL BACK the last migration)
 	pnpm payload migrate:down
 
+## Content
+.PHONY: import-legal
+import-legal: ## Import the privacy policy and terms as drafts (skips pages that already exist; asks first)
+	$(call confirm_db,Import legal pages as drafts)
+	PAYLOAD_MIGRATING=true pnpm payload run scripts/import-legal-pages.ts
+
 ## Tests
 .PHONY: test test-int test-e2e test-db-up test-db-down test-db-reset
 test: test-db-up test-int ## Start the local test database and run the integration tests
