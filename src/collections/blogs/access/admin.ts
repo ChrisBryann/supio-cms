@@ -2,6 +2,7 @@ import { checkRole } from '@/collections/users/access/check-role'
 import type { Access } from 'payload'
 
 export const admin: Access = ({ req: { user } }) => {
+  // checkRole below only ever matches admin-panel users, never customers
   if (user) {
     // admin have full access to delete blogs
     if (checkRole(['admin'], user)) {

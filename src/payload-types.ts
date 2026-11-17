@@ -64,6 +64,7 @@ export type SupportedTimezones =
 export interface Config {
   auth: {
     users: UserAuthOperations;
+    customers: CustomerAuthOperations;
   };
   blocks: {};
   collections: {
@@ -72,12 +73,22 @@ export interface Config {
     products: Product;
     blogs: Blog;
     partners: Partner;
+    customers: Customer;
+    seminars: Seminar;
+    purchases: Purchase;
+    'legal-pages': LegalPage;
     'payload-folders': FolderInterface;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
   collectionsJoins: {
+    customers: {
+      purchases: 'purchases';
+    };
+    seminars: {
+      purchases: 'purchases';
+    };
     'payload-folders': {
       documentsAndFolders: 'payload-folders' | 'media';
     };
@@ -88,6 +99,10 @@ export interface Config {
     products: ProductsSelect<false> | ProductsSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     partners: PartnersSelect<false> | PartnersSelect<true>;
+    customers: CustomersSelect<false> | CustomersSelect<true>;
+    seminars: SeminarsSelect<false> | SeminarsSelect<true>;
+    purchases: PurchasesSelect<false> | PurchasesSelect<true>;
+    'legal-pages': LegalPagesSelect<false> | LegalPagesSelect<true>;
     'payload-folders': PayloadFoldersSelect<false> | PayloadFoldersSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -96,18 +111,44 @@ export interface Config {
   db: {
     defaultIDType: string;
   };
-  globals: {};
-  globalsSelect: {};
-  locale: null;
-  user: User & {
-    collection: 'users';
+  globals: {
+    'company-info': CompanyInfo;
   };
+  globalsSelect: {
+    'company-info': CompanyInfoSelect<false> | CompanyInfoSelect<true>;
+  };
+  locale: null;
+  user:
+    | (User & {
+        collection: 'users';
+      })
+    | (Customer & {
+        collection: 'customers';
+      });
   jobs: {
     tasks: unknown;
     workflows: unknown;
   };
 }
 export interface UserAuthOperations {
+  forgotPassword: {
+    email: string;
+    password: string;
+  };
+  login: {
+    email: string;
+    password: string;
+  };
+  registerFirstUser: {
+    email: string;
+    password: string;
+  };
+  unlock: {
+    email: string;
+    password: string;
+  };
+}
+export interface CustomerAuthOperations {
   forgotPassword: {
     email: string;
     password: string;
@@ -582,6 +623,249 @@ export interface Partner {
   createdAt: string;
 }
 /**
+ * People who can sign in to the website with Google or Yahoo. Add a customer here with the email they paid with; sign-in never creates one.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customers".
+ */
+export interface Customer {
+  id: string;
+  /**
+   * The Google or Yahoo email the customer paid with. Stored in lowercase.
+   */
+  email: string;
+  name?: string | null;
+  /**
+   * Shown in the video watermark. Search this code to find who a leaked recording belongs to. Generated automatically.
+   */
+  watermarkCode?: string | null;
+  /**
+   * Set from the Google/Yahoo profile at sign-in.
+   */
+  avatarUrl?: string | null;
+  /**
+   * Saved automatically the first time this customer signs in with Google.
+   */
+  googleSub?: string | null;
+  /**
+   * Saved automatically the first time this customer signs in with Yahoo.
+   */
+  yahooSub?: string | null;
+  purchases?: {
+    docs?: (string | Purchase)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Each purchase gives one customer lifetime access to one seminar. To refund, set the status to "revoked" instead of deleting, so you keep a record.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "purchases".
+ */
+export interface Purchase {
+  id: string;
+  title?: string | null;
+  /**
+   * Start typing the customer’s email. Not in the list? Create the customer first.
+   */
+  customer: string | Customer;
+  customerEmail?: string | null;
+  seminar: string | Seminar;
+  /**
+   * Set to "revoked" after a refund. The customer loses access immediately.
+   */
+  status: 'active' | 'revoked';
+  /**
+   * Payment / order ID from the external payment platform.
+   */
+  paymentReference?: string | null;
+  /**
+   * Internal notes. Never shown to the customer.
+   */
+  notes?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seminars".
+ */
+export interface Seminar {
+  id: string;
+  title: string;
+  /**
+   * Used in the website URL, e.g. /seminars/my-seminar. Leave empty to generate it from the title.
+   */
+  slug: string;
+  /**
+   * Only published seminars appear on the website.
+   */
+  published?: boolean | null;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  speaker?: string | null;
+  /**
+   * When the seminar was held.
+   */
+  seminarDate?: string | null;
+  duration?: string | null;
+  thumbnail?: (string | null) | Media;
+  /**
+   * Display only.
+   */
+  priceLabel?: string | null;
+  /**
+   * Link to the external payment page for this seminar.
+   */
+  purchaseUrl?: string | null;
+  /**
+   * From the Mux dashboard (asset → Playback IDs, policy "signed"). Never sent to customers.
+   */
+  muxPlaybackId: string;
+  purchases?: {
+    docs?: (string | Purchase)[];
+    hasNextPage?: boolean;
+    totalDocs?: number;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Privacy policy, terms of service and other legal pages shown on the website. Use the slugs "privacy-policy" and "terms" for those two pages. Company name and contact details come from Website → Company info.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages".
+ */
+export interface LegalPage {
+  id: string;
+  title: string;
+  /**
+   * Used in the website URL, e.g. /privacy-policy. Use "privacy-policy" and "terms" for those two pages.
+   */
+  slug: string;
+  /**
+   * Shown under the title as "Terakhir diperbarui". Change it when the content changes meaningfully.
+   */
+  lastUpdated: string;
+  /**
+   * Optional. Short description for search engines and link previews (about 150 characters).
+   */
+  metaDescription?: string | null;
+  /**
+   * Linked at the bottom of the page, e.g. the terms page links to the privacy policy.
+   */
+  relatedPages?: (string | LegalPage)[] | null;
+  /**
+   * Opening paragraphs above section 1. You can link to the other legal page here.
+   */
+  intro?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Numbered automatically in this order (1., 2., 3., …). Drag to reorder. The table of contents is built from these headings.
+   */
+  sections: {
+    heading: string;
+    /**
+     * Link name for the table of contents (yoursite.com/privacy-policy#watermark). Leave empty to use the heading. Changing it breaks existing links to this section.
+     */
+    anchor?: string | null;
+    /**
+     * Shown in this order. Text for paragraphs and lists; Subheading for "a.", "b."; Table; Contact card for the company contact details.
+     */
+    body: (
+      | {
+          content: {
+            root: {
+              type: string;
+              children: {
+                type: string;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'text';
+        }
+      | {
+          /**
+           * Lettered automatically on the website (a., b., c., …) in the order they appear in this section.
+           */
+          heading: string;
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'subheading';
+        }
+      | {
+          /**
+           * Column headers, left to right, e.g. "Tujuan" and "Dasar pemrosesan".
+           */
+          columns: {
+            label: string;
+            id?: string | null;
+          }[];
+          /**
+           * Each row needs one cell per column, in the same order.
+           */
+          rows: {
+            cells: {
+              text: string;
+              id?: string | null;
+            }[];
+            id?: string | null;
+          }[];
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'table';
+        }
+      | {
+          id?: string | null;
+          blockName?: string | null;
+          blockType: 'contactCard';
+        }
+    )[];
+    id?: string | null;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-locked-documents".
  */
@@ -609,14 +893,35 @@ export interface PayloadLockedDocument {
         value: string | Partner;
       } | null)
     | ({
+        relationTo: 'customers';
+        value: string | Customer;
+      } | null)
+    | ({
+        relationTo: 'seminars';
+        value: string | Seminar;
+      } | null)
+    | ({
+        relationTo: 'purchases';
+        value: string | Purchase;
+      } | null)
+    | ({
+        relationTo: 'legal-pages';
+        value: string | LegalPage;
+      } | null)
+    | ({
         relationTo: 'payload-folders';
         value: string | FolderInterface;
       } | null);
   globalSlug?: string | null;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'customers';
+        value: string | Customer;
+      };
   updatedAt: string;
   createdAt: string;
 }
@@ -626,10 +931,15 @@ export interface PayloadLockedDocument {
  */
 export interface PayloadPreference {
   id: string;
-  user: {
-    relationTo: 'users';
-    value: string | User;
-  };
+  user:
+    | {
+        relationTo: 'users';
+        value: string | User;
+      }
+    | {
+        relationTo: 'customers';
+        value: string | Customer;
+      };
   key?: string | null;
   value?:
     | {
@@ -733,6 +1043,125 @@ export interface PartnersSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "customers_select".
+ */
+export interface CustomersSelect<T extends boolean = true> {
+  email?: T;
+  name?: T;
+  watermarkCode?: T;
+  avatarUrl?: T;
+  googleSub?: T;
+  yahooSub?: T;
+  purchases?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seminars_select".
+ */
+export interface SeminarsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  published?: T;
+  description?: T;
+  speaker?: T;
+  seminarDate?: T;
+  duration?: T;
+  thumbnail?: T;
+  priceLabel?: T;
+  purchaseUrl?: T;
+  muxPlaybackId?: T;
+  purchases?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "purchases_select".
+ */
+export interface PurchasesSelect<T extends boolean = true> {
+  title?: T;
+  customer?: T;
+  customerEmail?: T;
+  seminar?: T;
+  status?: T;
+  paymentReference?: T;
+  notes?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "legal-pages_select".
+ */
+export interface LegalPagesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  lastUpdated?: T;
+  metaDescription?: T;
+  relatedPages?: T;
+  intro?: T;
+  sections?:
+    | T
+    | {
+        heading?: T;
+        anchor?: T;
+        body?:
+          | T
+          | {
+              text?:
+                | T
+                | {
+                    content?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              subheading?:
+                | T
+                | {
+                    heading?: T;
+                    id?: T;
+                    blockName?: T;
+                  };
+              table?:
+                | T
+                | {
+                    columns?:
+                      | T
+                      | {
+                          label?: T;
+                          id?: T;
+                        };
+                    rows?:
+                      | T
+                      | {
+                          cells?:
+                            | T
+                            | {
+                                text?: T;
+                                id?: T;
+                              };
+                          id?: T;
+                        };
+                    id?: T;
+                    blockName?: T;
+                  };
+              contactCard?:
+                | T
+                | {
+                    id?: T;
+                    blockName?: T;
+                  };
+            };
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-folders_select".
  */
 export interface PayloadFoldersSelect<T extends boolean = true> {
@@ -773,6 +1202,39 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Company name, address and WhatsApp contact shown on legal pages (contact card and page header).
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "company-info".
+ */
+export interface CompanyInfo {
+  id: string;
+  legalName: string;
+  /**
+   * Shown in brackets under the company name, e.g. "(SCI Aesthetics)".
+   */
+  brandName?: string | null;
+  address: string;
+  whatsappUrl: string;
+  whatsappLabel: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "company-info_select".
+ */
+export interface CompanyInfoSelect<T extends boolean = true> {
+  legalName?: T;
+  brandName?: T;
+  address?: T;
+  whatsappUrl?: T;
+  whatsappLabel?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

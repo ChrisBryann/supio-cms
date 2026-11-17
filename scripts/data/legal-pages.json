@@ -1,0 +1,459 @@
+{
+  "source": "Frontend prototype pages /privacy-policy and /terms",
+  "companyInfo": {
+    "legalName": "PT SUPIO COSMETICS INDONESIA",
+    "brandName": "SCI Aesthetics",
+    "address": "Ciputra World Office Unit 1003, Jl. Mayjen Sungkono No.87 Lantai 10, Gn. Sari, Kec. Dukuhpakis, Surabaya, Jawa Timur 60224",
+    "whatsappUrl": "https://wa.me/62881082511298/",
+    "whatsappLabel": "hubungi kami melalui WhatsApp resmi"
+  },
+  "pages": [
+    {
+      "slug": "privacy-policy",
+      "title": "Kebijakan Privasi",
+      "lastUpdated": "2026-11-17T00:00:00.000Z",
+      "legalName": "PT SUPIO COSMETICS INDONESIA",
+      "introHtml": "<p>PT SUPIO COSMETICS INDONESIA (“<strong>SCI Aesthetics</strong>”, “<strong>kami</strong>”) menghormati privasi Anda dan berkomitmen melindungi Data Pribadi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, mengungkapkan, dan melindungi Data Pribadi Anda ketika Anda mengakses situs web kami, menggunakan fitur verifikasi keaslian produk, serta membeli dan menonton seminar daring kami (bersama-sama disebut “<strong>Layanan</strong>”).</p><p>Kebijakan ini disusun berdasarkan Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (“<strong>UU PDP</strong>”), Undang-Undang Nomor 11 Tahun 2008 tentang Informasi dan Transaksi Elektronik beserta perubahannya, Peraturan Pemerintah Nomor 71 Tahun 2019 tentang Penyelenggaraan Sistem dan Transaksi Elektronik, serta peraturan perundang-undangan terkait lainnya. Dalam pemrosesan Data Pribadi melalui Layanan, kami bertindak sebagai Pengendali Data Pribadi.</p>",
+      "sections": [
+        {
+          "heading": "Data Pribadi yang Kami Kumpulkan",
+          "anchor": "data-yang-dikumpulkan",
+          "body": [
+            {
+              "type": "subheading",
+              "heading": "Data yang Anda berikan secara langsung"
+            },
+            {
+              "type": "text",
+              "html": "<p>Ketika Anda menghubungi kami atau membeli seminar melalui WhatsApp atau saluran resmi lainnya, kami dapat menerima nama, alamat email, nomor telepon/WhatsApp, nama klinik atau instansi dan profesi Anda (jika Anda berikan), isi percakapan, serta informasi dan bukti pembayaran.</p>"
+            },
+            {
+              "type": "subheading",
+              "heading": "Data dari penyedia layanan masuk (Google atau Yahoo)"
+            },
+            {
+              "type": "text",
+              "html": "<p>Ketika Anda masuk untuk menonton seminar, kami menerima alamat email beserta status verifikasinya, nama, foto profil, dan pengenal akun dari Google atau Yahoo. Kami <strong>tidak pernah</strong> menerima maupun menyimpan kata sandi akun Google atau Yahoo Anda.</p>"
+            },
+            {
+              "type": "subheading",
+              "heading": "Data saat menonton seminar"
+            },
+            {
+              "type": "text",
+              "html": "<p>Setiap kali Anda memutar seminar, kami mencatat alamat IP, waktu akses, seminar yang diputar, kode watermark yang terkait dengan akun Anda, serta informasi teknis perangkat dan peramban. Penyedia layanan video kami juga memproses data teknis pemutaran (misalnya kualitas streaming, jenis perangkat, dan perkiraan lokasi berdasarkan alamat IP) untuk menayangkan video dan menjaga kualitasnya.</p>"
+            },
+            {
+              "type": "subheading",
+              "heading": "Data teknis kunjungan"
+            },
+            {
+              "type": "text",
+              "html": "<p>Seperti situs web pada umumnya, alamat IP, jenis peramban, halaman yang diakses, dan waktu akses dapat tercatat dalam log server oleh penyedia hosting kami untuk keperluan keamanan dan pemeliharaan sistem.</p>"
+            },
+            {
+              "type": "subheading",
+              "heading": "Verifikasi keaslian produk"
+            },
+            {
+              "type": "text",
+              "html": "<p>Kode pada QR produk yang Anda pindai hanya digunakan untuk mencocokkan nomor seri dengan catatan stok kami. Fitur ini tidak meminta dan tidak mengaitkan kode tersebut dengan identitas Anda.</p><p>Selain informasi pembayaran yang diperlukan untuk mengonfirmasi transaksi, kami tidak meminta Data Pribadi yang bersifat spesifik sebagaimana dimaksud dalam Pasal 4 UU PDP (seperti data kesehatan, biometrik, atau catatan kejahatan). Mohon untuk tidak mengirimkan data tersebut kepada kami, termasuk data pasien Anda.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Tujuan dan Dasar Pemrosesan",
+          "anchor": "tujuan-dan-dasar",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Kami memproses Data Pribadi Anda hanya untuk tujuan yang jelas dan berdasarkan dasar pemrosesan yang sah sebagaimana diatur dalam Pasal 20 UU PDP:</p>"
+            },
+            {
+              "type": "table",
+              "columns": [
+                "Tujuan",
+                "Dasar pemrosesan"
+              ],
+              "rows": [
+                [
+                  "Memproses pembelian seminar, mengonfirmasi pembayaran, dan memberikan akses seminar ke akun Anda",
+                  "Pemenuhan kewajiban perjanjian dengan Anda"
+                ],
+                [
+                  "Memverifikasi identitas Anda saat masuk dan mencocokkan akun dengan pembelian",
+                  "Pemenuhan kewajiban perjanjian dengan Anda"
+                ],
+                [
+                  "Menampilkan watermark dan mencatat akses untuk mencegah serta menelusuri perekaman atau penyebaran seminar tanpa izin",
+                  "Kepentingan yang sah, yaitu melindungi hak cipta kami dan para pembicara"
+                ],
+                [
+                  "Menjaga keamanan Layanan serta mencegah penipuan dan penyalahgunaan",
+                  "Kepentingan yang sah"
+                ],
+                [
+                  "Menanggapi pertanyaan, keluhan, dan permintaan Anda",
+                  "Pemenuhan kewajiban perjanjian dan kepentingan yang sah"
+                ],
+                [
+                  "Menyimpan catatan transaksi serta mematuhi kewajiban hukum, termasuk perpajakan dan permintaan instansi yang berwenang",
+                  "Pemenuhan kewajiban hukum"
+                ],
+                [
+                  "Mengirimkan informasi tentang produk atau seminar baru",
+                  "Persetujuan Anda, yang dapat ditarik kembali kapan saja"
+                ]
+              ]
+            },
+            {
+              "type": "text",
+              "html": "<p>Kami tidak menjual Data Pribadi Anda dan tidak menggunakannya untuk pengambilan keputusan yang semata-mata didasarkan pada pemrosesan otomatis yang menimbulkan akibat hukum bagi Anda.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Watermark pada Seminar",
+          "anchor": "watermark",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Untuk melindungi konten seminar, setiap video menampilkan watermark yang memuat alamat email, kode watermark, alamat IP, serta tanggal dan waktu pemutaran Anda. Watermark ini hanya ditampilkan di layar Anda, namun akan ikut terekam apabila video direkam atau disebarkan, sehingga sumber rekaman dapat ditelusuri.</p><p>Pemutar video memeriksa di perangkat Anda bahwa watermark tetap terlihat. Apabila watermark ditutupi, disembunyikan, atau diubah, pemutaran akan dijeda dan suara dibisukan. Mohon tidak membagikan tangkapan layar yang memperlihatkan data tersebut kepada pihak lain.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Cookie dan Teknologi Serupa",
+          "anchor": "cookie",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Kami hanya menggunakan cookie yang benar-benar diperlukan, yaitu cookie sesi yang aman (<em>httpOnly</em>) untuk menjaga Anda tetap masuk ke akun. Cookie ini dihapus ketika Anda keluar atau ketika sesi berakhir.</p><p>Kami tidak menggunakan cookie iklan, pelacakan lintas situs, maupun analitik pihak ketiga. Google atau Yahoo dapat menetapkan cookie mereka sendiri di domain mereka selama proses masuk, yang tunduk pada kebijakan privasi masing-masing. Apabila Anda menonaktifkan cookie di peramban, Anda tidak akan dapat masuk untuk menonton seminar.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Pengungkapan kepada Pihak Ketiga",
+          "anchor": "pengungkapan",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Kami hanya mengungkapkan Data Pribadi Anda kepada pihak-pihak berikut:</p><ul><li><strong>Penyedia layanan (Prosesor Data Pribadi)</strong> yang memproses data atas nama dan berdasarkan instruksi kami, terikat perjanjian untuk menjaga kerahasiaan dan keamanan data, yaitu penyedia hosting situs web dan server (seperti Vercel), sistem manajemen konten dan basis data, Mux (penyimpanan dan streaming video), Google dan Yahoo (autentikasi masuk), WhatsApp/Meta (komunikasi dan pemesanan), serta bank atau penyedia jasa pembayaran.</li><li><strong>Instansi pemerintah atau aparat penegak hukum</strong> apabila diwajibkan oleh peraturan perundang-undangan atau perintah pengadilan.</li><li><strong>Kuasa hukum dan aparat penegak hukum dalam rangka penegakan hak</strong>, apabila terdapat dugaan pelanggaran hak cipta atas seminar. Dalam hal ini kami dapat menggunakan data akses terkait (email, kode watermark, alamat IP, dan waktu) sebagai bukti.</li><li><strong>Pihak penerus usaha</strong> dalam hal penggabungan, pemisahan, pengambilalihan, atau peleburan perusahaan, dengan pemberitahuan kepada Anda sesuai ketentuan UU PDP.</li></ul><p>Sistem stok yang kami gunakan untuk verifikasi keaslian produk (Accurate Online) hanya menerima nomor seri produk, bukan Data Pribadi Anda.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Transfer Data ke Luar Wilayah Indonesia",
+          "anchor": "transfer-luar-negeri",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Sebagian penyedia layanan kami (antara lain Vercel, Mux, Google, Yahoo, dan Meta) memproses atau menyimpan data di server yang berada di luar wilayah Indonesia, termasuk Amerika Serikat. Transfer tersebut kami lakukan sesuai Pasal 56 UU PDP, yaitu dengan memastikan negara tujuan memiliki tingkat pelindungan Data Pribadi yang setara atau lebih tinggi, atau terdapat pelindungan yang memadai dan bersifat mengikat. Apabila kedua syarat tersebut tidak terpenuhi, transfer dilakukan berdasarkan persetujuan Anda.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Jangka Waktu Penyimpanan",
+          "anchor": "retensi",
+          "body": [
+            {
+              "type": "text",
+              "html": "<ul><li><strong>Data akun dan daftar seminar</strong> disimpan selama akun Anda aktif dan akses seminar masih berlaku. Setelah itu, data akan dihapus atau dianonimkan dalam jangka waktu yang wajar, kecuali penyimpanan lebih lama diwajibkan oleh hukum.</li><li><strong>Catatan akses dan pemutaran</strong> (alamat IP, waktu, dan kode watermark) disimpan selama diperlukan untuk keamanan dan penelusuran pelanggaran, kemudian dihapus atau dianonimkan. Catatan yang berkaitan dengan dugaan pelanggaran dapat disimpan hingga penanganannya selesai.</li><li><strong>Catatan transaksi</strong> disimpan sesuai ketentuan perpajakan, yaitu selama 10 (sepuluh) tahun.</li><li><strong>Percakapan WhatsApp</strong> disimpan selama diperlukan untuk melayani pembelian dan pertanyaan Anda.</li></ul>"
+            }
+          ]
+        },
+        {
+          "heading": "Keamanan Data",
+          "anchor": "keamanan",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Kami menerapkan langkah teknis dan organisasi yang wajar untuk melindungi Data Pribadi Anda, antara lain enkripsi koneksi (HTTPS), cookie sesi <em>httpOnly</em>, token pemutaran video yang bersifat sementara dan ditandatangani, serta pembatasan akses data hanya bagi personel yang membutuhkannya.</p><p>Tidak ada sistem yang sepenuhnya aman. Apabila terjadi kegagalan pelindungan Data Pribadi, kami akan menyampaikan pemberitahuan tertulis kepada Anda dan kepada lembaga yang berwenang paling lambat 3 x 24 (tiga kali dua puluh empat) jam sesuai Pasal 46 UU PDP. Anda juga bertanggung jawab menjaga keamanan akun Google atau Yahoo yang Anda gunakan untuk masuk.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Hak Anda sebagai Subjek Data Pribadi",
+          "anchor": "hak-anda",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Sesuai Pasal 5 sampai dengan Pasal 13 UU PDP, Anda berhak untuk:</p><ul><li>mendapatkan informasi tentang kejelasan identitas, dasar kepentingan hukum, tujuan permintaan dan penggunaan Data Pribadi, serta akuntabilitas kami;</li><li>melengkapi, memperbarui, dan/atau memperbaiki Data Pribadi Anda;</li><li>mendapatkan akses dan salinan Data Pribadi Anda;</li><li>mengakhiri pemrosesan, menghapus, dan/atau memusnahkan Data Pribadi Anda;</li><li>menarik kembali persetujuan yang telah Anda berikan;</li><li>mengajukan keberatan atas keputusan yang semata-mata didasarkan pada pemrosesan otomatis, termasuk pemrofilan;</li><li>menunda atau membatasi pemrosesan Data Pribadi Anda;</li><li>menggugat dan menerima ganti rugi atas pelanggaran pemrosesan Data Pribadi Anda; dan</li><li>mendapatkan dan/atau menggunakan Data Pribadi Anda dalam format yang lazim digunakan atau dapat dibaca oleh sistem elektronik, serta mengirimkannya kepada pengendali lain.</li></ul><p>Untuk menggunakan hak tersebut, hubungi kami melalui kontak di bawah. Kami dapat meminta verifikasi identitas sebelum memproses permintaan Anda dan akan menanggapinya dalam jangka waktu yang ditetapkan UU PDP. Pelaksanaan hak tertentu dapat dikecualikan sebagaimana diatur dalam Pasal 15 UU PDP, misalnya untuk memenuhi kewajiban hukum. Mohon diperhatikan bahwa penghapusan data akun akan mengakhiri akses Anda ke seminar yang telah dibeli.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Data Pribadi Anak",
+          "anchor": "anak",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Layanan seminar ditujukan bagi orang dewasa, khususnya tenaga profesional di bidang estetika dan kesehatan. Kami tidak dengan sengaja mengumpulkan Data Pribadi anak. Pemrosesan Data Pribadi anak hanya dilakukan dengan persetujuan orang tua atau wali sesuai Pasal 25 UU PDP. Apabila kami mengetahui telah menerima Data Pribadi anak tanpa persetujuan tersebut, kami akan menghapusnya.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Tautan ke Situs Pihak Ketiga",
+          "anchor": "tautan-pihak-ketiga",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Situs kami dapat memuat tautan ke situs atau layanan pihak ketiga, seperti WhatsApp, Instagram, atau situs mitra kami. Kebijakan Privasi ini tidak berlaku untuk layanan tersebut. Mohon baca kebijakan privasi masing-masing pihak ketiga.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Perubahan Kebijakan Privasi",
+          "anchor": "perubahan",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu. Versi terbaru selalu tersedia di halaman ini dengan tanggal pembaruan di bagian atas. Untuk perubahan yang material, kami akan memberitahukannya melalui Situs atau email sebelum perubahan berlaku.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Hubungi Kami",
+          "anchor": "kontak",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Untuk pertanyaan, keluhan, atau permintaan terkait Data Pribadi Anda, hubungi kami dengan mencantumkan “Permintaan Data Pribadi” serta alamat email akun Anda:</p>"
+            },
+            {
+              "type": "contactCard"
+            }
+          ]
+        }
+      ],
+      "relatedSlugs": [
+        "terms"
+      ]
+    },
+    {
+      "slug": "terms",
+      "title": "Syarat dan Ketentuan",
+      "lastUpdated": "2026-11-17T00:00:00.000Z",
+      "legalName": "PT SUPIO COSMETICS INDONESIA",
+      "introHtml": "<p>Syarat dan Ketentuan ini (“<strong>Ketentuan</strong>”) mengatur akses dan penggunaan Situs serta Layanan yang disediakan oleh PT SUPIO COSMETICS INDONESIA (“<strong>SCI Aesthetics</strong>”, “<strong>kami</strong>”).</p><p>Dengan mengakses Situs, masuk ke Akun, atau membeli Seminar, Anda menyatakan telah membaca, memahami, dan menyetujui Ketentuan ini serta <a href=\"/privacy-policy\">Kebijakan Privasi</a> kami. Apabila Anda tidak menyetujuinya, mohon untuk tidak menggunakan Layanan.</p>",
+      "sections": [
+        {
+          "heading": "Definisi",
+          "anchor": "definisi",
+          "body": [
+            {
+              "type": "text",
+              "html": "<ul><li><strong>“Kami”</strong> adalah PT SUPIO COSMETICS INDONESIA, perseroan terbatas yang berkedudukan di Surabaya, Indonesia, yang menjalankan merek SCI Aesthetics.</li><li><strong>“Situs”</strong> adalah situs web ini beserta seluruh halamannya.</li><li><strong>“Layanan”</strong> adalah Situs, informasi produk, fitur verifikasi keaslian produk, seminar daring, dan layanan terkait lainnya yang kami sediakan.</li><li><strong>“Seminar”</strong> adalah konten video edukasi beserta materi pendukungnya yang tersedia melalui Situs.</li><li><strong>“Akun”</strong> adalah akses Anda ke Seminar yang terhubung dengan alamat email yang Anda gunakan saat pembelian.</li><li><strong>“Anda”</strong> adalah setiap orang yang mengakses atau menggunakan Layanan.</li></ul>"
+            }
+          ]
+        },
+        {
+          "heading": "Kelayakan Pengguna",
+          "anchor": "kelayakan",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Dengan menggunakan Layanan, Anda menyatakan telah dewasa dan cakap melakukan perbuatan hukum menurut hukum Indonesia. Seminar terutama ditujukan bagi tenaga profesional di bidang kesehatan dan estetika. Apabila Anda menggunakan Layanan atas nama klinik atau badan usaha, Anda menyatakan berwenang untuk mengikatkan pihak tersebut pada Ketentuan ini.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Informasi Produk",
+          "anchor": "informasi-produk",
+          "body": [
+            {
+              "type": "text",
+              "html": "<ul><li>Informasi produk di Situs disediakan untuk keperluan informasi umum dan bukan merupakan nasihat medis, diagnosis, atau pengganti konsultasi dengan tenaga kesehatan.</li><li>Produk kami digunakan sesuai petunjuk penggunaan pada label serta ketentuan izin edar yang berlaku, dan untuk produk tertentu hanya oleh atau di bawah pengawasan tenaga profesional yang berwenang.</li><li>Gambar produk bersifat ilustrasi. Spesifikasi, kemasan, dan ketersediaan produk dapat berubah sewaktu-waktu.</li><li>Pembelian produk melalui mitra atau klinik kami tunduk pada ketentuan transaksi masing-masing mitra tersebut.</li></ul>"
+            }
+          ]
+        },
+        {
+          "heading": "Verifikasi Keaslian Produk",
+          "anchor": "verifikasi-produk",
+          "body": [
+            {
+              "type": "text",
+              "html": "<ul><li>Hasil verifikasi didasarkan pada catatan stok kami pada saat pemeriksaan dilakukan. Hasil “asli” berarti nomor seri produk tercatat dalam sistem kami dan kode QR-nya memiliki tanda tangan digital yang sah.</li><li>Verifikasi tidak menjamin kondisi penyimpanan, tanggal kedaluwarsa, maupun penanganan produk setelah keluar dari distribusi resmi kami.</li><li>Apabila hasil verifikasi gagal atau Anda mencurigai produk palsu, mohon segera hubungi kami.</li><li>Dilarang memalsukan atau menggandakan kode QR, maupun melakukan pemindaian atau permintaan verifikasi secara otomatis dalam jumlah besar.</li></ul>"
+            }
+          ]
+        },
+        {
+          "heading": "Akun dan Masuk",
+          "anchor": "akun",
+          "body": [
+            {
+              "type": "text",
+              "html": "<ul><li>Akses Seminar diberikan kepada alamat email yang Anda gunakan saat pembelian. Anda masuk menggunakan akun Google atau Yahoo dengan alamat email yang sama. Pastikan alamat email yang Anda berikan benar, karena akses dapat tertunda apabila email tidak sesuai.</li><li>Akun bersifat pribadi dan hanya boleh digunakan oleh satu orang. Anda dilarang meminjamkan, membagikan, atau mengalihkan Akun kepada pihak lain.</li><li>Anda bertanggung jawab menjaga keamanan akun Google atau Yahoo yang digunakan untuk masuk. Segera beri tahu kami apabila Anda mengetahui adanya akses tanpa izin ke Akun Anda.</li></ul>"
+            }
+          ]
+        },
+        {
+          "heading": "Pembelian Seminar",
+          "anchor": "pembelian-seminar",
+          "body": [
+            {
+              "type": "text",
+              "html": "<ul><li>Seminar dibeli melalui WhatsApp resmi kami atau tautan pembelian lain yang kami sediakan di Situs. Harga dicantumkan dalam mata uang Rupiah sebagaimana diinformasikan pada saat pembelian.</li><li>Pembayaran hanya dilakukan ke rekening atau kanal pembayaran yang kami informasikan melalui saluran resmi kami. Kami tidak pernah meminta kata sandi, kode OTP, atau PIN Anda.</li><li>Transaksi dianggap sah setelah kami mengonfirmasi penerimaan pembayaran. Akses Seminar kemudian diberikan ke alamat email Anda, dan Anda dapat menontonnya setelah masuk.</li><li>Masa akses Seminar mengikuti informasi yang diberikan pada saat pembelian. Apabila tidak ditentukan, akses berlaku selama Seminar tersebut tersedia pada Layanan. Apabila kami menarik Seminar sebelum masa akses yang dijanjikan berakhir, kami akan memberitahukannya kepada Anda serta menawarkan pengganti yang setara atau pengembalian dana secara proporsional.</li><li>Untuk menonton Seminar diperlukan peramban modern dan koneksi internet yang stabil. Demi perlindungan konten, fitur tertentu seperti mengunduh, <em>picture-in-picture</em>, dan transmisi ke perangkat lain (<em>cast</em>/AirPlay) tidak tersedia.</li></ul>"
+            }
+          ]
+        },
+        {
+          "heading": "Pembatalan dan Pengembalian Dana",
+          "anchor": "pengembalian-dana",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Karena Seminar merupakan konten digital yang dapat langsung diakses, pembelian tidak dapat dibatalkan setelah akses diberikan, kecuali dalam hal berikut:</p><ol><li>Seminar tidak dapat diakses karena kendala dari pihak kami yang tidak dapat kami selesaikan dalam 7 (tujuh) hari kerja sejak dilaporkan;</li><li>terjadi pembayaran ganda atau kelebihan pembayaran;</li><li>Seminar yang diberikan tidak sesuai dengan yang Anda beli dan kami tidak dapat memberikan Seminar yang benar; atau</li><li>Seminar ditarik sebelum masa akses yang dijanjikan berakhir, sebagaimana diatur pada bagian Pembelian Seminar.</li></ol><p>Permintaan pengembalian dana diajukan melalui kontak resmi kami paling lambat 14 (empat belas) hari sejak pembayaran atau sejak kendala terjadi, disertai bukti pembayaran. Dana yang disetujui akan dikembalikan ke rekening asal paling lambat 14 (empat belas) hari kerja sejak persetujuan.</p><p>Ketentuan ini tidak mengurangi hak Anda sebagai konsumen berdasarkan Undang-Undang Nomor 8 Tahun 1999 tentang Perlindungan Konsumen.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Lisensi dan Hak Kekayaan Intelektual",
+          "anchor": "lisensi",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Dengan membeli Seminar, Anda memperoleh lisensi terbatas, pribadi, non-eksklusif, dan tidak dapat dialihkan untuk menonton Seminar melalui Situs bagi keperluan pembelajaran dan pengembangan profesional Anda sendiri. Pembelian tidak mengalihkan kepemilikan atas Seminar kepada Anda.</p><p>Seluruh konten Layanan, termasuk video, materi presentasi, teks, gambar, logo, dan merek, merupakan milik kami, para pembicara, atau pemberi lisensi kami, dan dilindungi oleh Undang-Undang Nomor 28 Tahun 2014 tentang Hak Cipta serta Undang-Undang Nomor 20 Tahun 2016 tentang Merek dan Indikasi Geografis.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Larangan",
+          "anchor": "larangan",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Anda dilarang untuk:</p><ul><li>merekam, menangkap layar, mengunduh, menyalin, atau menyimpan Seminar dalam bentuk apa pun, termasuk menggunakan perangkat lunak perekam layar atau kamera;</li><li>menyebarkan, menjual, menyewakan, mengunggah, menyiarkan, atau mempertontonkan Seminar kepada orang lain atau kelompok, termasuk untuk pelatihan internal klinik, tanpa izin tertulis dari kami;</li><li>membagikan Akun, kredensial, atau tautan pemutaran kepada pihak lain;</li><li>menghilangkan, menutupi, mengaburkan, atau mengubah watermark, maupun merusak atau membuat tidak berfungsi sarana kontrol teknologi yang melindungi Seminar, sebagaimana dilarang Pasal 52 Undang-Undang Hak Cipta;</li><li>menggunakan Seminar untuk membuat karya turunan, materi pelatihan komersial, atau melatih sistem kecerdasan buatan;</li><li>mengakses Layanan secara tidak sah, menggunakan robot atau <em>scraper</em>, atau mengganggu keamanan dan kinerja sistem kami sebagaimana dilarang Undang-Undang Informasi dan Transaksi Elektronik; dan</li><li>menggunakan Layanan untuk tujuan yang melanggar hukum.</li></ul>"
+            }
+          ]
+        },
+        {
+          "heading": "Watermark dan Pemantauan Akses",
+          "anchor": "watermark",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Anda memahami dan menyetujui bahwa setiap pemutaran Seminar menampilkan watermark berisi alamat email, kode watermark, alamat IP, serta tanggal dan waktu pemutaran Anda, dan bahwa akses Anda dicatat. Pemutaran akan dijeda dan dibisukan apabila watermark ditutupi atau diubah. Penjelasan lengkap mengenai pemrosesan data ini tersedia dalam <a href=\"/privacy-policy\">Kebijakan Privasi</a>.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Pelanggaran dan Sanksi",
+          "anchor": "pelanggaran",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Apabila Anda melanggar Ketentuan ini, kami berhak menangguhkan atau mengakhiri akses Anda ke Seminar tanpa pengembalian dana, meminta penghapusan konten yang disebarkan tanpa izin, menuntut ganti rugi, dan/atau melaporkan pelanggaran kepada aparat penegak hukum. Pelanggaran hak cipta dan penyalahgunaan sistem elektronik dapat dikenai sanksi perdata maupun pidana sebagaimana diatur dalam Undang-Undang Hak Cipta dan Undang-Undang Informasi dan Transaksi Elektronik.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Konten Seminar",
+          "anchor": "konten-seminar",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Seminar bersifat edukatif dan memuat pandangan para pembicara. Konten Seminar bukan merupakan nasihat medis untuk pasien tertentu dan tidak menggantikan penilaian klinis profesional. Setiap tindakan klinis tetap menjadi tanggung jawab tenaga profesional yang melakukannya, sesuai kompetensi dan izin praktik masing-masing. Kami berupaya menyajikan informasi yang akurat, namun ilmu dan praktik klinis dapat berkembang sehingga informasi tertentu dapat berubah.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Ketersediaan Layanan",
+          "anchor": "ketersediaan",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Kami berupaya agar Layanan selalu dapat diakses, namun Layanan dapat sementara tidak tersedia karena pemeliharaan, pembaruan, atau gangguan teknis. Kami akan berupaya memulihkan Layanan secepatnya dan, sedapat mungkin, memberitahukan pemeliharaan terjadwal sebelumnya. Kami dapat mengubah, menambah, atau menghentikan fitur tertentu dari Layanan.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Batasan Tanggung Jawab",
+          "anchor": "batasan-tanggung-jawab",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Sejauh diizinkan oleh hukum yang berlaku, kami tidak bertanggung jawab atas:</p><ul><li>kerugian yang timbul dari penggunaan informasi produk atau Seminar tanpa penilaian profesional yang memadai;</li><li>gangguan yang disebabkan oleh perangkat, peramban, atau koneksi internet Anda;</li><li>akses tanpa izin ke Akun yang terjadi karena kelalaian Anda dalam menjaga keamanan akun Google atau Yahoo Anda; dan</li><li>kerugian tidak langsung yang timbul di luar kendali wajar kami.</li></ul><p>Tanggung jawab kami atas suatu Seminar terbatas pada jumlah yang Anda bayarkan untuk Seminar tersebut, sejauh diizinkan oleh hukum. Tidak ada ketentuan dalam Ketentuan ini yang mengecualikan atau membatasi tanggung jawab kami yang menurut hukum tidak dapat dikecualikan atau dibatasi, termasuk berdasarkan Undang-Undang Perlindungan Konsumen.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Keadaan Kahar",
+          "anchor": "keadaan-kahar",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Kami tidak dianggap lalai apabila tidak dapat melaksanakan kewajiban karena keadaan kahar (<em>force majeure</em>), yaitu keadaan di luar kendali wajar kami seperti bencana alam, wabah, kebakaran, kerusuhan, kebijakan pemerintah, gangguan jaringan internet atau listrik berskala luas, maupun serangan siber. Kami akan melanjutkan pelaksanaan kewajiban segera setelah keadaan tersebut berakhir.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Tautan Pihak Ketiga",
+          "anchor": "tautan-pihak-ketiga",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Situs dapat memuat tautan ke layanan pihak ketiga, seperti WhatsApp, Instagram, Google, Yahoo, atau situs mitra kami. Penggunaan layanan tersebut tunduk pada syarat dan kebijakan masing-masing pihak ketiga.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Perubahan Ketentuan",
+          "anchor": "perubahan",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Kami dapat mengubah Ketentuan ini dari waktu ke waktu. Versi terbaru selalu tersedia di halaman ini dengan tanggal pembaruan di bagian atas. Untuk perubahan yang material, kami akan memberitahukannya melalui Situs atau email sebelum perubahan berlaku. Dengan tetap menggunakan Layanan setelah perubahan berlaku, Anda dianggap menyetujui Ketentuan yang telah diubah. Perubahan tidak mengurangi hak atas Seminar yang telah Anda beli sebelumnya.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Hukum yang Berlaku dan Penyelesaian Sengketa",
+          "anchor": "hukum-dan-sengketa",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Ketentuan ini diatur oleh dan ditafsirkan berdasarkan hukum Negara Republik Indonesia.</p><p>Setiap perselisihan akan diselesaikan terlebih dahulu secara musyawarah untuk mufakat dalam waktu 30 (tiga puluh) hari sejak salah satu pihak menyampaikan pemberitahuan tertulis. Apabila musyawarah tidak mencapai kesepakatan, perselisihan diselesaikan melalui Pengadilan Negeri Surabaya. Hal ini tidak mengurangi hak Anda sebagai konsumen untuk menyelesaikan sengketa melalui Badan Penyelesaian Sengketa Konsumen (BPSK) atau mekanisme lain sebagaimana diatur dalam Undang-Undang Perlindungan Konsumen.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Bahasa",
+          "anchor": "bahasa",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Ketentuan ini dibuat dalam Bahasa Indonesia sesuai Undang-Undang Nomor 24 Tahun 2009 tentang Bendera, Bahasa, dan Lambang Negara, serta Lagu Kebangsaan. Apabila Ketentuan ini diterjemahkan ke bahasa lain dan terdapat perbedaan penafsiran, versi Bahasa Indonesia yang berlaku.</p>"
+            }
+          ]
+        },
+        {
+          "heading": "Ketentuan Lain-Lain",
+          "anchor": "ketentuan-lain",
+          "body": [
+            {
+              "type": "text",
+              "html": "<ul><li>Apabila salah satu ketentuan dinyatakan tidak sah atau tidak dapat dilaksanakan, ketentuan lainnya tetap berlaku sepenuhnya.</li><li>Tidak dilaksanakannya suatu hak oleh kami tidak berarti kami melepaskan hak tersebut.</li><li>Ketentuan ini, bersama <a href=\"/privacy-policy\">Kebijakan Privasi</a> dan informasi yang diberikan pada saat pembelian, merupakan keseluruhan kesepakatan antara Anda dan kami mengenai Layanan.</li></ul>"
+            }
+          ]
+        },
+        {
+          "heading": "Layanan Pengaduan dan Kontak",
+          "anchor": "kontak",
+          "body": [
+            {
+              "type": "text",
+              "html": "<p>Untuk pertanyaan, pengaduan konsumen, permintaan pengembalian dana, atau laporan pelanggaran dan produk palsu, hubungi kami:</p>"
+            },
+            {
+              "type": "contactCard"
+            }
+          ]
+        }
+      ],
+      "relatedSlugs": [
+        "privacy-policy"
+      ]
+    }
+  ]
+}

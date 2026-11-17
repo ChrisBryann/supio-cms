@@ -18,25 +18,26 @@ import { resendAdapter } from '@payloadcms/email-resend'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { migrations } from './migrations'
 import { Partners } from './collections/partners/config'
+import { Customers } from './collections/customers/config'
+import { Seminars } from './collections/seminars/config'
+import { Purchases } from './collections/purchases/config'
+import { LegalPages } from './collections/legal-pages/config'
+import { CompanyInfo } from './globals/company-info'
+import { extraCorsHeaders, getAllowedOrigins, getServerUrl, isProduction } from './lib/env'
+import { purchasesActiveUniqueIndex } from './db/purchases-active-unique'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  serverURL: process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : 'http://localhost:3001',
-  csrf: [
-    process.env.NEXT_PUBLIC_VERCEL_URL
-      ? `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`
-      : 'http://localhost:3001',
-  ].filter(Boolean),
-  cors: [
-    process.env.NEXT_PUBLIC_VERCEL_URL
-      ? `https://${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL : process.env.NEXT_PUBLIC_VERCEL_URL}`
-      : 'http://localhost:3001',
-    process.env.NEXT_PUBLIC_FRONTEND_URL || '',
-  ].filter(Boolean),
+  // Production: SERVER_URL (falls back to the Vercel URL). The admin panel prefixes every API call with this.
+  // Development: empty, so the admin panel uses relative URLs and works on http://localhost:3000 even when
+  // SERVER_URL is an ngrok URL (the OAuth callbacks read SERVER_URL directly, see src/lib/env.ts).
+  serverURL: isProduction ? getServerUrl() : '',
+  // Cookies are only accepted from these origins (this server, FRONTEND_URL, and localhost in development).
+  csrf: getAllowedOrigins(),
+  // Same list; Payload sends Access-Control-Allow-Credentials: true for these origins.
+  cors: { origins: getAllowedOrigins(), headers: extraCorsHeaders },
   cookiePrefix: process.env.COOKIE_PREFIX,
   routes: {
     admin: '/', // make admin route point to base path because we don't need the frontend
@@ -78,7 +79,8 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Products, Blogs, Partners],
+  collections: [Users, Media, Products, Blogs, Partners, Customers, Seminars, Purchases, LegalPages],
+  globals: [CompanyInfo],
   editor: lexicalEditor({
     features: ({ defaultFeatures }) => [...defaultFeatures, FixedToolbarFeature()],
   }),
@@ -91,6 +93,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
     idType: 'uuid',
+    afterSchemaInit: [purchasesActiveUniqueIndex],
     prodMigrations: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? migrations : undefined,
   }),
   sharp,
