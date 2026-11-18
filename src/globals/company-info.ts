@@ -1,5 +1,6 @@
 import type { GlobalConfig } from 'payload'
 import { staffEditor } from '@/access/roles'
+import { revalidateFrontend } from '@/lib/revalidate-frontend'
 
 /**
  * Company details shown on the website: the legal entity under legal page titles and the
@@ -16,6 +17,14 @@ export const CompanyInfo: GlobalConfig = {
   access: {
     read: () => true,
     update: staffEditor,
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc, req }) => {
+        await revalidateFrontend(req, ['company-info'])
+        return doc
+      },
+    ],
   },
   fields: [
     {

@@ -3,6 +3,7 @@ import type { Access, Block, CollectionBeforeChangeHook, CollectionConfig } from
 import { FixedToolbarFeature, LinkFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { isStaff, staffAdmin, staffEditor } from '@/access/roles'
 import { slugField, slugify } from '@/fields/slug'
+import { revalidateFrontend } from '@/lib/revalidate-frontend'
 
 /** Staff see drafts too; customers and the public see published pages only. */
 const readLegalPages: Access = ({ req: { user } }) => {
@@ -181,6 +182,20 @@ export const LegalPages: CollectionConfig = {
   },
   hooks: {
     beforeChange: [prepareSections],
+    afterChange: [
+      async ({ doc, previousDoc, req }) => {
+        // Saving a draft changes nothing on the website; publishing or unpublishing does.
+        if (doc._status === 'published' || previousDoc?._status === 'published') {
+          await revalidateFrontend(req, ['legal-pages'])
+        }
+        return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc, req }) => {
+        if (doc._status === 'published') await revalidateFrontend(req, ['legal-pages'])
+      },
+    ],
   },
   fields: [
     {
