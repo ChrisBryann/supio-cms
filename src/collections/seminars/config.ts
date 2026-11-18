@@ -3,6 +3,7 @@ import { isStaff, staffAdmin, staffEditor } from '@/access/roles'
 import { refreshPurchaseTitles } from '../purchases/hooks/set-title'
 import { playSeminar } from '@/endpoints/play-seminar'
 import { slugField } from '@/fields/slug'
+import { revalidateFrontend } from '@/lib/revalidate-frontend'
 
 /** Staff see everything (incl. drafts); customers and the public see published seminars only. */
 const readSeminars: Access = ({ req: { user } }) => {
@@ -145,7 +146,16 @@ export const Seminars: CollectionConfig = {
         if (operation === 'update' && previousDoc?.title !== doc.title) {
           await refreshPurchaseTitles(req, { seminar: doc.id })
         }
+        // The website only shows published seminars, so edits to an unpublished one don't matter.
+        if (doc.published || previousDoc?.published) {
+          await revalidateFrontend(req, ['seminars'])
+        }
         return doc
+      },
+    ],
+    afterDelete: [
+      async ({ doc, req }) => {
+        if (doc.published) await revalidateFrontend(req, ['seminars'])
       },
     ],
   },
